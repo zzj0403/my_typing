@@ -8,7 +8,7 @@ progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 7
-  completed_plans: 4
+  completed_plans: 5
 ---
 
 # State: My Typing
@@ -32,7 +32,7 @@ See: `.planning/PROJECT.md`
 | Phase | Status | Description |
 |-------|--------|-------------|
 | Phase 0 | ✅ Complete | Fork 项目、清理代码 |
-| Phase 1 | 🔵 Pending | 文章管理系统 |
+| Phase 1 | 🔵 In Progress | 文章管理系统 |
 | Phase 2 | ⚪ Not Started | 整篇文章打字模式 |
 | Phase 3 | ⚪ Not Started | UI 优化 & 收尾 |
 
@@ -85,6 +85,8 @@ See: `.planning/PROJECT.md`
 - [Phase 01-article-management]: Use partial Article type (Omit<Article, 'sentences' | 'createdAt'>) for poem data
 - [Phase 01-article-management]: Include author info in description field for poem attribution
 - [Phase 01-article-management]: 使用 vitest 1.6.0 而非最新版以确保与 Vite 2.x 兼容
+- [Phase 01-article-management]: CharInfo 复用现有 MarkCharConfig | HanziCharConfig，确保与 TextRegister 兼容
+- [Phase 01-article-management]: splitIntoSentences 支持 。！？； 作为中文句子终止符
 
 ## Next Action
 
@@ -105,6 +107,15 @@ See: `.planning/PROJECT.md`
 - 清理 Hero 页面双拼选择代码
 - 验证项目正常运行
 - Summary: `.planning/phases/00-project-init/00-01-SUMMARY.md`
+
+### 2026-03-17 Phase 1 Plan 02 完成
+
+- 创建 Article/Sentence/CharInfo 类型定义
+- 实现 splitIntoSentences 中文分句函数
+- 修复 vite-tsconfig-paths 不兼容问题
+- 创建独立 vitest.config.ts 配置
+- 22 个测试用例全部通过
+- Summary: `.planning/phases/01-article-management/01-02-SUMMARY.md`
 
 ### 2026-03-17 初始化
 
