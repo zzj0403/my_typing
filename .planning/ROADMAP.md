@@ -23,11 +23,11 @@ Plans:
 
 ---
 
-## Phase 1: 文章管理系统
+## Phase 1: 文章管理系统 ✅ COMPLETE
 
 **Goal:** 实现文章导入、存储和选择功能
 
-**Plans:** 6 plans in 4 waves
+**Plans:** 6 plans in 4 waves (6 complete)
 
 Plans:
 - [x] 01-01-PLAN.md — 测试基础设施 (Wave 0) — Vitest 配置和测试骨架
@@ -35,7 +35,8 @@ Plans:
 - [x] 01-03-PLAN.md — 诗词数据 (Wave 1) — 25 首唐诗宋词
 - [x] 01-04-PLAN.md — 名言数据和文件解析 (Wave 1) — 32 条名言 + parseTxtFile
 - [x] 01-05-PLAN.md — Zustand Store (Wave 2) — 文章状态管理 + 持久化
-- [ ] 01-06-PLAN.md — 文章列表 UI (Wave 3) — ArticleList 组件 + 上传/删除功能
+- [x] 01-06-PLAN.md — 文章列表 UI (Wave 3) — ArticleList 组件 + 上传/删除功能
+  - Summary: `.planning/phases/01-article-management/01-06-SUMMARY.md`
 
 **Success Criteria:**
 - 可选择内置诗词/名言进行练习

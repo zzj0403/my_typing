@@ -6,7 +6,7 @@ status: planning
 last_updated: "2026-03-17T14:50:29Z"
 progress:
   total_phases: 4
-  completed_phases: 1
+  completed_phases: 2
   total_plans: 7
   completed_plans: 7
 ---
@@ -32,11 +32,11 @@ See: `.planning/PROJECT.md`
 | Phase | Status | Description |
 |-------|--------|-------------|
 | Phase 0 | ✅ Complete | Fork 项目、清理代码 |
-| Phase 1 | 🔵 In Progress | 文章管理系统 |
-| Phase 2 | ⚪ Not Started | 整篇文章打字模式 |
+| Phase 1 | ✅ Complete | 文章管理系统 |
+| Phase 2 | 🔵 In Progress | 整篇文章打字模式 |
 | Phase 3 | ⚪ Not Started | UI 优化 & 收尾 |
 
-**Current Position:** Phase 1 Plan 05 - Complete
+**Current Position:** Phase 1 Complete - Ready for Phase 2
 
 ---
 
@@ -90,12 +90,15 @@ See: `.planning/PROJECT.md`
 - [Phase 01-article-management]: Use FileReader.readAsText with UTF-8 encoding for Chinese txt file support
 - [Phase 01-article-management]: 32 classic Chinese quotes from I Ching, Analects, Mencius, Tao Te Ching, etc.
 - [Phase 01-article-management]: Use Zustand persist middleware with partialize for upload-only persistence
+- [Phase 01-article-management]: Use Drawer component for article list display instead of separate page
+- [Phase 01-article-management]: Convert ü to v in pinyin for keyboard input compatibility (绿 -> lv)
+- [Phase 01-article-management]: Filter poems/quotes by ID prefix (poem-/quote-) since they share builtin source
 
 ## Next Action
 
-**Run:** `/gsd:plan-phase 1`
+**Run:** `/gsd:plan-phase 2`
 
-开始规划 Phase 1 - 文章管理系统的详细任务。
+开始规划 Phase 2 - 整篇文章打字模式。
 
 ---
 
@@ -136,6 +139,15 @@ See: `.planning/PROJECT.md`
 - 内置文章（诗词 + 名言）自动加载
 - 9 个单元测试全部通过
 - Summary: `.planning/phases/01-article-management/01-05-SUMMARY.md`
+
+### 2026-03-17 Phase 1 Plan 06 完成
+
+- 创建 ArticleList 组件（类型定义、样式、主组件）
+- 实现分类 Tabs（全部/诗词/名言/我的）
+- 集成文件上传功能（.txt 文件，最大 100KB）
+- 集成到 Hero 页面 Drawer
+- 修复 ü -> v 拼音转换（绿 -> lv）
+- Summary: `.planning/phases/01-article-management/01-06-SUMMARY.md`
 
 ### 2026-03-17 初始化
 
