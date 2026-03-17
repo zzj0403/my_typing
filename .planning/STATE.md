@@ -8,7 +8,7 @@ progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 7
-  completed_plans: 5
+  completed_plans: 6
 ---
 
 # State: My Typing
@@ -36,7 +36,7 @@ See: `.planning/PROJECT.md`
 | Phase 2 | ⚪ Not Started | 整篇文章打字模式 |
 | Phase 3 | ⚪ Not Started | UI 优化 & 收尾 |
 
-**Current Position:** Phase 1 Plan 02 - Complete
+**Current Position:** Phase 1 Plan 04 - Complete
 
 ---
 
@@ -87,6 +87,8 @@ See: `.planning/PROJECT.md`
 - [Phase 01-article-management]: 使用 vitest 1.6.0 而非最新版以确保与 Vite 2.x 兼容
 - [Phase 01-article-management]: CharInfo 复用现有 MarkCharConfig | HanziCharConfig，确保与 TextRegister 兼容
 - [Phase 01-article-management]: splitIntoSentences 支持 。！？； 作为中文句子终止符
+- [Phase 01-article-management]: Use FileReader.readAsText with UTF-8 encoding for Chinese txt file support
+- [Phase 01-article-management]: 32 classic Chinese quotes from I Ching, Analects, Mencius, Tao Te Ching, etc.
 
 ## Next Action
 
@@ -116,6 +118,14 @@ See: `.planning/PROJECT.md`
 - 创建独立 vitest.config.ts 配置
 - 22 个测试用例全部通过
 - Summary: `.planning/phases/01-article-management/01-02-SUMMARY.md`
+
+### 2026-03-17 Phase 1 Plan 04 完成
+
+- 创建 QUOTES_DATA 名言数据（32 条经典名言）
+- 实现 parseTxtFile 文件解析函数（UTF-8 编码）
+- 实现 isValidTxtFile 文件类型验证
+- 13 个测试用例全部通过
+- Summary: `.planning/phases/01-article-management/01-04-SUMMARY.md`
 
 ### 2026-03-17 初始化
 
