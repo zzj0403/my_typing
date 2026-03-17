@@ -106,9 +106,11 @@ describe('useArticleStore', () => {
 
   describe('initialization', () => {
     it('should load builtin articles on init', () => {
-      // 这个测试需要验证 store 初始化时加载了 POEMS_DATA 和 QUOTES_DATA
-      const { articles } = useArticleStore.getState()
-      const builtinArticles = articles.filter(a => a.source === 'builtin')
+      // 手动调用初始化内置文章（测试环境没有 window 对象）
+      const { initBuiltinArticles, articles } = useArticleStore.getState()
+      initBuiltinArticles()
+      const updatedArticles = useArticleStore.getState().articles
+      const builtinArticles = updatedArticles.filter(a => a.source === 'builtin')
       expect(builtinArticles.length).toBeGreaterThan(0)
     })
   })
