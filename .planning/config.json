@@ -1,0 +1,7 @@
+{
+  "mode": "interactive",
+  "granularity": "coarse",
+  "gitTracking": true,
+  "autoCommit": true,
+  "parallelization": true
+}
