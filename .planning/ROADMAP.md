@@ -10,12 +10,10 @@
 
 **Goal:** Fork 参考项目，清理不需要的代码，建立开发环境
 
-**Tasks:**
-- [ ] Fork https://github.com/yunsii/pinyin 到本地
-- [ ] 安装依赖 (`pnpm install`)
-- [ ] 移除双拼相关代码和配置
-- [ ] 简化项目结构（移除不需要的模块）
-- [ ] 验证项目可正常运行
+**Plans:** 1 plan
+
+Plans:
+- [ ] 00-01-PLAN.md — Fork 项目、清理双拼代码、验证运行
 
 **Success Criteria:**
 - 项目可本地启动
