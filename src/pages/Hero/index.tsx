@@ -31,7 +31,6 @@ import { Hanzi } from '@/components'
 const mouseEnterDelay = 0.5
 
 export default function Hero() {
-  const schemaOptions = Registry.schema.getSchemaOptions()
   const textOptions = Registry.text.getTextOptions()
 
   const [formRef] = Form.useForm()
@@ -45,7 +44,7 @@ export default function Hero() {
     onDownload,
     onClearCache,
   } = useProfileBin({
-    schemaType: schemaOptions[0]?.type,
+    schemaType: 'QuanPin', // 仅支持全拼
     textKey: textOptions[0]?.key,
     inputTextIndex: 0,
     inputPinyin: '',
@@ -68,12 +67,13 @@ export default function Hero() {
 
   const currentPinyin = React.useMemo(() => {
     if (currentCharConfig) {
+      // 仅支持全拼，使用固定 schemaType
       return Registry.schema.getPinyin(
-        bin.schemaType!,
+        'QuanPin',
         currentCharConfig.quanpin,
       )
     }
-  }, [currentCharConfig, bin.schemaType])
+  }, [currentCharConfig])
 
   React.useEffect(() => {
     if (bin.inputPinyin && bin.inputPinyin === currentPinyin) {
@@ -101,18 +101,6 @@ export default function Hero() {
           <Button
             icon={<SettingOutlined />}
             onClick={() => toggleSettingsVisible()}
-          />
-          <Select
-            style={{
-              width: 100,
-            }}
-            options={schemaOptions.map((item) => ({
-              value: item.type,
-              label: item.displayName,
-            }))}
-            placeholder='拼写方案'
-            value={bin.schemaType}
-            onChange={(value) => onChangeBin({ schemaType: value })}
           />
           <Select
             style={{
