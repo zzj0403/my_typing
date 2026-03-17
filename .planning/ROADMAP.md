@@ -6,14 +6,15 @@
 
 ---
 
-## Phase 0: 项目初始化
+## Phase 0: 项目初始化 ✅ COMPLETE
 
 **Goal:** Fork 参考项目，清理不需要的代码，建立开发环境
 
-**Plans:** 1 plan
+**Plans:** 1 plan (1 complete)
 
 Plans:
-- [ ] 00-01-PLAN.md — Fork 项目、清理双拼代码、验证运行
+- [x] 00-01-PLAN.md — Fork 项目、清理双拼代码、验证运行
+  - Summary: `.planning/phases/00-project-init/00-01-SUMMARY.md`
 
 **Success Criteria:**
 - 项目可本地启动

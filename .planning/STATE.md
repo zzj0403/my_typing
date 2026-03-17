@@ -1,7 +1,7 @@
 # State: My Typing
 
 **Last updated:** 2026-03-17
-**Status:** Initialized - Ready for Phase 0
+**Status:** Phase 0 Complete - Ready for Phase 1
 
 ---
 
@@ -10,7 +10,7 @@
 See: `.planning/PROJECT.md`
 
 **Core value:** 能导入自己的文章 + 实时反馈 + 打完一篇
-**Current focus:** Phase 0 - 项目初始化
+**Current focus:** Phase 1 - 文章管理系统
 
 ---
 
@@ -18,10 +18,12 @@ See: `.planning/PROJECT.md`
 
 | Phase | Status | Description |
 |-------|--------|-------------|
-| Phase 0 | 🔵 Pending | Fork 项目、清理代码 |
-| Phase 1 | ⚪ Not Started | 文章管理系统 |
+| Phase 0 | ✅ Complete | Fork 项目、清理代码 |
+| Phase 1 | 🔵 Pending | 文章管理系统 |
 | Phase 2 | ⚪ Not Started | 整篇文章打字模式 |
 | Phase 3 | ⚪ Not Started | UI 优化 & 收尾 |
+
+**Current Position:** Phase 0 Plan 01 - Complete
 
 ---
 
@@ -41,7 +43,7 @@ See: `.planning/PROJECT.md`
 - 📝 文章导入功能
 
 **移除部分:**
-- ❌ 双拼支持
+- ❌ 双拼支持（已清理完成）
 - ❌ 单字练习模式（保留但弱化）
 
 ---
@@ -58,15 +60,35 @@ See: `.planning/PROJECT.md`
 
 ---
 
+## Decisions
+
+### Phase 0 Decisions (2026-03-17)
+- 删除所有双拼相关代码，仅保留全拼功能
+- 简化 PinyinSchemaRegister，移除方案注册机制
+- 保留 PinyinSchemaRegister 类结构但简化实现，便于未来扩展
+- antd 组件弃用警告暂不处理，非阻塞性
+
+---
+
 ## Next Action
 
-**Run:** `/gsd:plan-phase 0`
+**Run:** `/gsd:plan-phase 1`
 
-开始规划 Phase 0 的详细任务。
+开始规划 Phase 1 - 文章管理系统的详细任务。
 
 ---
 
 ## Session Notes
+
+### 2026-03-17 Phase 0 完成
+
+- Fork yunsii/pinyin 到本地
+- 删除双拼方案文件 (XianHe.ts)
+- 清理 Pinyin.ts 双拼枚举
+- 简化 PinyinSchemaRegister
+- 清理 Hero 页面双拼选择代码
+- 验证项目正常运行
+- Summary: `.planning/phases/00-project-init/00-01-SUMMARY.md`
 
 ### 2026-03-17 初始化
 
