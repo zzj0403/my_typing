@@ -8,7 +8,7 @@
 ### 文章管理 (ART)
 
 - [ ] **ART-01**: 用户可以上传 txt 文件导入自定义文章
-- [ ] **ART-02**: 内置诗词库（唐诗宋词精选）
+- [x] **ART-02**: 内置诗词库（唐诗宋词精选）
 - [ ] **ART-03**: 内置名人名言库
 - [ ] **ART-04**: 文章自动分句处理（按标点分割）
 - [ ] **ART-05**: 用户可以选择文章进行练习
@@ -60,7 +60,7 @@
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | ART-01 | Phase 1 | Pending |
-| ART-02 | Phase 1 | Pending |
+| ART-02 | Phase 1 | Complete |
 | ART-03 | Phase 1 | Pending |
 | ART-04 | Phase 1 | Pending |
 | ART-05 | Phase 1 | Pending |

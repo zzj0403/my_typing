@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-last_updated: "2026-03-17T13:48:43.053Z"
+last_updated: "2026-03-17T14:38:39.846Z"
 progress:
   total_phases: 4
   completed_phases: 1
-  total_plans: 1
-  completed_plans: 1
+  total_plans: 7
+  completed_plans: 2
 ---
 
 # State: My Typing
@@ -82,6 +82,8 @@ See: `.planning/PROJECT.md`
 - antd 组件弃用警告暂不处理，非阻塞性
 
 ---
+- [Phase 01-article-management]: Use partial Article type (Omit<Article, 'sentences' | 'createdAt'>) for poem data
+- [Phase 01-article-management]: Include author info in description field for poem attribution
 
 ## Next Action
 

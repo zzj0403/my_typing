@@ -27,14 +27,15 @@ Plans:
 
 **Goal:** 实现文章导入、存储和选择功能
 
-**Tasks:**
-- [ ] 设计文章数据结构 (id, title, content, sentences[])
-- [ ] 实现文章分句函数（按标点分割）
-- [ ] 创建内置诗词库数据文件
-- [ ] 创建内置名人名言数据文件
-- [ ] 实现 txt 文件上传和解析
-- [ ] 实现文章列表 UI（选择文章）
-- [ ] 实现文章管理状态（Zustand store）
+**Plans:** 6 plans in 4 waves
+
+Plans:
+- [ ] 01-01-PLAN.md — 测试基础设施 (Wave 0) — Vitest 配置和测试骨架
+- [ ] 01-02-PLAN.md — 类型定义和分句函数 (Wave 1) — Article 类型 + splitIntoSentences
+- [ ] 01-03-PLAN.md — 诗词数据 (Wave 1) — 25 首唐诗宋词
+- [ ] 01-04-PLAN.md — 名言数据和文件解析 (Wave 1) — 32 条名言 + parseTxtFile
+- [ ] 01-05-PLAN.md — Zustand Store (Wave 2) — 文章状态管理 + 持久化
+- [ ] 01-06-PLAN.md — 文章列表 UI (Wave 3) — ArticleList 组件 + 上传/删除功能
 
 **Success Criteria:**
 - 可选择内置诗词/名言进行练习
@@ -106,6 +107,10 @@ Plans:
 Phase 0 (初始化)
     ↓
 Phase 1 (文章管理)
+    ├── 01-01 (Wave 0: 测试框架)
+    ├── 01-02, 01-03, 01-04 (Wave 1: 数据层)
+    ├── 01-05 (Wave 2: 状态层)
+    └── 01-06 (Wave 3: UI 层)
     ↓
 Phase 2 (打字模式) ← 依赖 Phase 1 的文章数据
     ↓
@@ -125,3 +130,4 @@ Phase 3 (UI优化)
 ---
 *Roadmap created: 2026-03-17*
 *Estimated phases: 4 (v1) + 2 (v2)*
+*Last updated: 2026-03-17 - Phase 1 plans created*
