@@ -3,7 +3,6 @@ import * as path from 'path'
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import vitePluginImp from 'vite-plugin-imp'
-import tsconfigPaths from 'vite-tsconfig-paths'
 import vitApp from '@vitjs/vit'
 
 // https://vitejs.dev/config/
@@ -11,7 +10,6 @@ export default defineConfig({
   base: '/pinyin/',
   plugins: [
     react(),
-    tsconfigPaths(),
     vitePluginImp({
       libList: [
         {
