@@ -16,10 +16,12 @@ function textToChars(text: string): CharInfo[] {
     // 检查是否为汉字
     const isHanzi = /[\u4e00-\u9fa5]/.test(char)
     if (isHanzi) {
+      // 将 ü 转换为 v，因为键盘上没有 ü 键
+      const quanpin = pinyin(char, { toneType: 'none' }).replace(/ü/g, 'v')
       return {
         type: CharType.Hanzi,
         char,
-        quanpin: pinyin(char, { toneType: 'none' }),
+        quanpin,
       }
     }
     return {

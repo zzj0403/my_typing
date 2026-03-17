@@ -17,16 +17,19 @@ import {
   LoadingOutlined,
   RedoOutlined,
   SettingOutlined,
+  FileTextOutlined,
 } from '@ant-design/icons'
 import { useBoolean } from 'ahooks'
 
 import useProfileBin from './useProfileBin'
 import styles from './index.module.less'
 
-import type { HanziCharConfig } from '@/core'
+import type { HanziCharConfig, TextConfig, MarkCharConfig, HanziCharConfig as HanziCharConfigType } from '@/core'
 
 import { CharType, Registry } from '@/core'
 import { Hanzi } from '@/components'
+import ArticleList from '@/components/ArticleList'
+import { useArticleStore } from '@/stores'
 
 const mouseEnterDelay = 0.5
 
@@ -51,6 +54,49 @@ export default function Hero() {
   })
   const [visible, setVisible] = React.useState(false)
   const [settingsVisible, { toggle: toggleSettingsVisible }] = useBoolean(false)
+  const [articleListVisible, { toggle: toggleArticleListVisible }] = useBoolean(false)
+
+  // 获取文章 store
+  const { currentArticleId, selectArticle, getArticleById } = useArticleStore()
+
+  // 当选中文章变化时，注册到 TextRegister
+  const handleArticleSelect = React.useCallback((articleId: string) => {
+    selectArticle(articleId)
+    const article = getArticleById(articleId)
+    if (article) {
+      // 将文章转换为 TextConfig 格式
+      const text: (MarkCharConfig | HanziCharConfigType)[] = []
+      article.sentences.forEach(sentence => {
+        sentence.chars.forEach(char => {
+          if (char.type === CharType.Hanzi) {
+            text.push({
+              type: CharType.Hanzi,
+              char: char.char,
+              quanpin: char.quanpin,
+            } as HanziCharConfigType)
+          } else {
+            text.push({
+              type: CharType.Mark,
+              char: char.char,
+            } as MarkCharConfig)
+          }
+        })
+      })
+
+      // 注册到 TextRegister
+      const textConfig: TextConfig = {
+        key: article.key,
+        title: article.title,
+        description: article.description,
+        text,
+      }
+      Registry.text.register(textConfig)
+
+      // 切换到新注册的文章
+      onChangeBin({ inputTextIndex: 0, textKey: article.key })
+      toggleArticleListVisible()
+    }
+  }, [selectArticle, getArticleById, onChangeBin, toggleArticleListVisible])
 
   const textConfig = React.useMemo(() => {
     return Registry.text.getTextConfig(bin?.textKey || textOptions[0]?.key)
@@ -61,7 +107,7 @@ export default function Hero() {
       return null
     }
     const text = textConfig.text.filter((item) => item.type === CharType.Hanzi)
-    const index = bin.inputTextIndex! % text.length
+    const index = (bin.inputTextIndex || 0) % text.length
     return text?.[index] as HanziCharConfig
   }, [textConfig, bin.inputTextIndex])
 
@@ -98,6 +144,10 @@ export default function Hero() {
       </div>
       <div className={styles.menu}>
         <Input.Group compact>
+          <Button
+            icon={<FileTextOutlined />}
+            onClick={() => toggleArticleListVisible()}
+          />
           <Button
             icon={<SettingOutlined />}
             onClick={() => toggleSettingsVisible()}
@@ -219,6 +269,21 @@ export default function Hero() {
         >
           Star
         </Button>
+      </Drawer>
+      {/* 文章列表 Drawer */}
+      <Drawer
+        width={400}
+        title={<Typography.Title level={4}>选择文章</Typography.Title>}
+        visible={articleListVisible}
+        onClose={() => toggleArticleListVisible()}
+        bodyStyle={{ padding: 0 }}
+      >
+        <ArticleList
+          showUpload={true}
+          showTabs={true}
+          defaultCategory='all'
+          onSelect={handleArticleSelect}
+        />
       </Drawer>
     </div>
   )
