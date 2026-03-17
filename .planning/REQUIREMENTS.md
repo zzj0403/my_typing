@@ -11,7 +11,7 @@
 - [x] **ART-02**: 内置诗词库（唐诗宋词精选）
 - [x] **ART-03**: 内置名人名言库
 - [x] **ART-04**: 文章自动分句处理（按标点分割）
-- [ ] **ART-05**: 用户可以选择文章进行练习
+- [x] **ART-05**: 用户可以选择文章进行练习
 
 ### 打字练习 (TYP)
 
@@ -63,7 +63,7 @@
 | ART-02 | Phase 1 | Complete |
 | ART-03 | Phase 1 | Complete |
 | ART-04 | Phase 1 | Complete |
-| ART-05 | Phase 1 | Pending |
+| ART-05 | Phase 1 | Complete |
 | TYP-01 | Phase 2 | Pending |
 | TYP-02 | Phase 2 | Pending |
 | TYP-03 | Phase 2 | Pending |

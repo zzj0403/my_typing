@@ -30,11 +30,11 @@ Plans:
 **Plans:** 6 plans in 4 waves
 
 Plans:
-- [ ] 01-01-PLAN.md — 测试基础设施 (Wave 0) — Vitest 配置和测试骨架
-- [ ] 01-02-PLAN.md — 类型定义和分句函数 (Wave 1) — Article 类型 + splitIntoSentences
-- [ ] 01-03-PLAN.md — 诗词数据 (Wave 1) — 25 首唐诗宋词
-- [ ] 01-04-PLAN.md — 名言数据和文件解析 (Wave 1) — 32 条名言 + parseTxtFile
-- [ ] 01-05-PLAN.md — Zustand Store (Wave 2) — 文章状态管理 + 持久化
+- [x] 01-01-PLAN.md — 测试基础设施 (Wave 0) — Vitest 配置和测试骨架
+- [x] 01-02-PLAN.md — 类型定义和分句函数 (Wave 1) — Article 类型 + splitIntoSentences
+- [x] 01-03-PLAN.md — 诗词数据 (Wave 1) — 25 首唐诗宋词
+- [x] 01-04-PLAN.md — 名言数据和文件解析 (Wave 1) — 32 条名言 + parseTxtFile
+- [x] 01-05-PLAN.md — Zustand Store (Wave 2) — 文章状态管理 + 持久化
 - [ ] 01-06-PLAN.md — 文章列表 UI (Wave 3) — ArticleList 组件 + 上传/删除功能
 
 **Success Criteria:**

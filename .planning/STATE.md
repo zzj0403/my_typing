@@ -3,12 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: planning
-last_updated: "2026-03-17T14:40:27.178Z"
+last_updated: "2026-03-17T14:50:29Z"
 progress:
   total_phases: 4
   completed_phases: 1
   total_plans: 7
-  completed_plans: 6
+  completed_plans: 7
 ---
 
 # State: My Typing
@@ -36,7 +36,7 @@ See: `.planning/PROJECT.md`
 | Phase 2 | ⚪ Not Started | 整篇文章打字模式 |
 | Phase 3 | ⚪ Not Started | UI 优化 & 收尾 |
 
-**Current Position:** Phase 1 Plan 04 - Complete
+**Current Position:** Phase 1 Plan 05 - Complete
 
 ---
 
@@ -89,6 +89,7 @@ See: `.planning/PROJECT.md`
 - [Phase 01-article-management]: splitIntoSentences 支持 。！？； 作为中文句子终止符
 - [Phase 01-article-management]: Use FileReader.readAsText with UTF-8 encoding for Chinese txt file support
 - [Phase 01-article-management]: 32 classic Chinese quotes from I Ching, Analects, Mencius, Tao Te Ching, etc.
+- [Phase 01-article-management]: Use Zustand persist middleware with partialize for upload-only persistence
 
 ## Next Action
 
@@ -126,6 +127,15 @@ See: `.planning/PROJECT.md`
 - 实现 isValidTxtFile 文件类型验证
 - 13 个测试用例全部通过
 - Summary: `.planning/phases/01-article-management/01-04-SUMMARY.md`
+
+### 2026-03-17 Phase 1 Plan 05 完成
+
+- 安装 Zustand、uuid、pinyin-pro 依赖
+- 创建 useArticleStore hook（文章 CRUD + 持久化）
+- 配置 persist 中间件，仅持久化上传文章
+- 内置文章（诗词 + 名言）自动加载
+- 9 个单元测试全部通过
+- Summary: `.planning/phases/01-article-management/01-05-SUMMARY.md`
 
 ### 2026-03-17 初始化
 
