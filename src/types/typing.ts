@@ -27,7 +27,7 @@ export interface TypingHanziChar {
   char: string
   quanpin: string
   state: CharState
-  inputPinyin?: string  // 用户输入（用于错误显示）
+  inputPinyin?: string // 用户输入（用于错误显示）
 }
 
 /**
@@ -39,11 +39,11 @@ export type TypingChar = TypingMarkChar | TypingHanziChar
  * 打字进度
  */
 export interface TypingProgress {
-  typed: number      // 当前位置 (currentIndex)
-  total: number      // 总字符数
-  correct: number    // 正确数
-  incorrect: number  // 错误数
-  skipped: number    // 跳过数
+  typed: number // 当前位置 (currentIndex)
+  total: number // 总字符数
+  correct: number // 正确数
+  incorrect: number // 错误数
+  skipped: number // 跳过数
 }
 
 /**

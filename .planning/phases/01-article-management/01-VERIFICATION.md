@@ -4,22 +4,18 @@ verified: 2026-03-17T15:30:00Z
 status: passed
 score: 5/5 must-haves verified
 re_verification: false
-
 ---
 
 # Phase 1: Article Management Verification Report
 
-**Phase Goal:** 实现文章管理功能，支持内置诗词/名言和用户上传 txt 文件，用户可以选择文章进行打字练习。
-**Verified:** 2026-03-17T15:30:00Z
-**Status:** passed
-**Re-verification:** No - initial verification
+**Phase Goal:** 实现文章管理功能，支持内置诗词/名言和用户上传 txt 文件，用户可以选择文章进行打字练习。 **Verified:** 2026-03-17T15:30:00Z **Status:** passed **Re-verification:** No - initial verification
 
 ## Goal Achievement
 
 ### Observable Truths
 
-| #   | Truth | Status | Evidence |
-| --- | ----- | ------ | -------- |
+| # | Truth | Status | Evidence |
+| --- | --- | --- | --- |
 | 1 | 用户可以上传 txt 文件导入自定义文章 (ART-01) | VERIFIED | fileParser.ts exports parseTxtFile with UTF-8 encoding; ArticleList uses Upload component with parseTxtFile; tests pass |
 | 2 | 内置诗词库可用 (ART-02) | VERIFIED | Poems.ts exports POEMS_DATA with 25 poems; tests verify data structure |
 | 3 | 内置名人名言库可用 (ART-03) | VERIFIED | Quotes.ts exports QUOTES_DATA with 32 quotes; tests verify data structure |
@@ -31,7 +27,7 @@ re_verification: false
 ### Required Artifacts
 
 | Artifact | Expected | Status | Details |
-| -------- | -------- | ------ | ------- |
+| --- | --- | --- | --- |
 | `src/types/article.ts` | Article type definition | VERIFIED | 46 lines, exports Article, Sentence, CharInfo, ArticleSource, CreateArticleInput |
 | `src/utils/sentenceSplit.ts` | Sentence splitting utility | VERIFIED | 52 lines, exports splitIntoSentences, handles Chinese punctuation |
 | `src/assets/texts/Poems.ts` | Built-in poems data | VERIFIED | 25 classic Tang/Song poems, all with proper structure |
@@ -50,7 +46,7 @@ re_verification: false
 ### Key Link Verification
 
 | From | To | Via | Status | Details |
-| ---- | -- | --- | ------ | ------- |
+| --- | --- | --- | --- | --- |
 | ArticleList/index.tsx | articleStore.ts | useArticleStore | WIRED | Direct import, uses articles, addArticle, removeArticle, selectArticle |
 | ArticleList/index.tsx | fileParser.ts | parseTxtFile | WIRED | Import and use in handleUpload callback |
 | articleStore.ts | types/article.ts | import type Article | WIRED | Imports Article, CreateArticleInput, ArticleSource, Sentence, CharInfo |
@@ -63,7 +59,7 @@ re_verification: false
 ### Requirements Coverage
 
 | Requirement | Source Plan | Description | Status | Evidence |
-| ----------- | ----------- | ----------- | ------ | -------- |
+| --- | --- | --- | --- | --- |
 | ART-01 | 01-04, 01-06 | User can upload txt files | SATISFIED | fileParser.ts implements parseTxtFile; ArticleList has Upload button calling parseTxtFile and addArticle |
 | ART-02 | 01-03 | Built-in poems library | SATISFIED | Poems.ts exports 25 classic poems; articleStore loads via initBuiltinArticles |
 | ART-03 | 01-04 | Built-in quotes library | SATISFIED | Quotes.ts exports 32 classic quotes; articleStore loads via initBuiltinArticles |
@@ -73,7 +69,7 @@ re_verification: false
 ### Anti-Patterns Found
 
 | File | Line | Pattern | Severity | Impact |
-| ---- | ---- | ------- | -------- | ------ |
+| --- | --- | --- | --- | --- |
 | src/utils/sentenceSplit.ts | 14 | `return []` | Info | Correct edge case handling for empty input - not a concern |
 | src/pages/Hero/index.tsx | 107 | `return null` | Info | Correct edge case handling for missing textConfig - not a concern |
 
@@ -107,5 +103,4 @@ No gaps found. All must-haves verified successfully.
 
 ---
 
-_Verified: 2026-03-17T15:30:00Z_
-_Verifier: Claude (gsd-verifier)_
+_Verified: 2026-03-17T15:30:00Z_ _Verifier: Claude (gsd-verifier)_

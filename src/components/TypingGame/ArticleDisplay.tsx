@@ -10,7 +10,6 @@ export interface ArticleDisplayProps {
   chars: TypingChar[]
   currentIndex: number
   inputPinyin?: string
-  onPinyinChange?: (value: string) => void
 }
 
 export function ArticleDisplay({
@@ -18,7 +17,6 @@ export function ArticleDisplay({
   chars,
   currentIndex,
   inputPinyin = '',
-  onPinyinChange
 }: ArticleDisplayProps) {
   let charOffset = 0
 
@@ -37,7 +35,8 @@ export function ArticleDisplay({
               const isCurrent = globalIndex === currentIndex
 
               // Get input pinyin for current hanzi character
-              const charInputPinyin = isCurrent && char.type === CharType.Hanzi ? inputPinyin : ''
+              const charInputPinyin =
+                isCurrent && char.type === CharType.Hanzi ? inputPinyin : ''
 
               return (
                 <CharSpan
@@ -46,7 +45,6 @@ export function ArticleDisplay({
                   state={typingChar?.state || 'pending'}
                   isCurrent={isCurrent}
                   inputPinyin={charInputPinyin}
-                  onPinyinChange={isCurrent ? onPinyinChange : undefined}
                 />
               )
             })}

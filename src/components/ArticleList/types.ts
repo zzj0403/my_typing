@@ -8,7 +8,10 @@ export type ArticleCategory = 'all' | 'poems' | 'quotes' | 'uploads'
 /**
  * 分类到来源的映射
  */
-export const CATEGORY_SOURCE_MAP: Record<ArticleCategory, ArticleSource | null> = {
+export const CATEGORY_SOURCE_MAP: Record<
+  ArticleCategory,
+  ArticleSource | null
+> = {
   all: null,
   poems: 'builtin',
   quotes: 'builtin',

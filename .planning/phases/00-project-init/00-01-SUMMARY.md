@@ -29,11 +29,11 @@ key-files:
     - src/assets/schemes/index.ts - 清空双拼导入
 
 key-decisions:
-  - "删除所有双拼相关代码，仅保留全拼功能"
-  - "简化 PinyinSchemaRegister，移除方案注册机制"
+  - '删除所有双拼相关代码，仅保留全拼功能'
+  - '简化 PinyinSchemaRegister，移除方案注册机制'
 
 patterns-established:
-  - "Quanpin 枚举作为唯一拼音类型"
+  - 'Quanpin 枚举作为唯一拼音类型'
 
 requirements-completed: []
 
@@ -55,6 +55,7 @@ completed: 2026-03-17
 - **Files modified:** 6
 
 ## Accomplishments
+
 - 成功 Fork 参考项目到本地
 - 完全移除双拼功能（小鹤双拼方案、双拼枚举、双拼注册逻辑）
 - 简化 Hero 页面，移除方案选择功能
@@ -76,6 +77,7 @@ Each task was committed atomically:
 **Plan metadata:** `1acf7fc` (docs: complete phase 0 plan)
 
 ## Files Created/Modified
+
 - `package.json` - 项目依赖配置
 - `pnpm-lock.yaml` - 依赖锁定文件
 - `.npmrc` - npm 配置（移除 husky）
@@ -87,6 +89,7 @@ Each task was committed atomically:
 - `src/pages/Hero/index.tsx` - 移除 schemaType 状态和双拼选择 UI
 
 ## Decisions Made
+
 - 删除而非注释双拼代码，保持代码库干净
 - 保留 PinyinSchemaRegister 类结构但简化实现，便于未来扩展
 - 控制台 antd 组件弃用警告（Modal/Drawer visible 属性）暂不处理，非阻塞性
@@ -96,6 +99,7 @@ Each task was committed atomically:
 None - plan executed exactly as written.
 
 ## Issues Encountered
+
 - 原项目使用 husky 和特定 npm registry，在安装依赖时遇到问题
   - 解决：移除 husky 依赖，配置国内 npm 镜像
 - antd 组件使用已弃用的 `visible` 属性，控制台显示警告
@@ -106,13 +110,14 @@ None - plan executed exactly as written.
 None - no external service configuration required.
 
 ## Next Phase Readiness
+
 - 项目环境已就绪，可以开始 Phase 1 开发
 - 全拼打字功能正常，可作为 Phase 2 的基础
 - 建议在 Phase 1 开始前确认文章数据结构设计
 
 ---
-*Phase: 00-project-init*
-*Completed: 2026-03-17*
+
+_Phase: 00-project-init_ _Completed: 2026-03-17_
 
 ## Self-Check: PASSED
 

@@ -16,7 +16,7 @@ created: 2026-03-18
 ## Design System
 
 | Property | Value |
-|----------|-------|
+| --- | --- |
 | Tool | none |
 | Preset | not applicable |
 | Component library | Ant Design 4.x |
@@ -24,6 +24,7 @@ created: 2026-03-18
 | Font | -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif |
 
 **Design System Notes:**
+
 - 项目使用 Ant Design 作为主要 UI 组件库，不使用 shadcn/tailwind
 - 样式方案使用 CSS Modules + Less
 - 复用 Phase 1 已建立的 ArticleList 组件设计模式
@@ -34,17 +35,18 @@ created: 2026-03-18
 
 Declared values (must be multiples of 4):
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| xs | 4px | Inline gaps, compact spacing |
-| sm | 8px | Compact element spacing, margins |
-| md | 16px | Default element spacing, padding |
-| lg | 24px | Section padding |
-| xl | 32px | Layout gaps |
-| 2xl | 48px | Major section breaks, empty state padding |
-| 3xl | 64px | Page-level spacing |
+| Token | Value | Usage                                     |
+| ----- | ----- | ----------------------------------------- |
+| xs    | 4px   | Inline gaps, compact spacing              |
+| sm    | 8px   | Compact element spacing, margins          |
+| md    | 16px  | Default element spacing, padding          |
+| lg    | 24px  | Section padding                           |
+| xl    | 32px  | Layout gaps                               |
+| 2xl   | 48px  | Major section breaks, empty state padding |
+| 3xl   | 64px  | Page-level spacing                        |
 
 Exceptions:
+
 - **44px** - Touch target minimum for interactive elements (符合 WCAG 2.1 标准)
 - **12px** - Existing ArticleList margin (legacy, maintain consistency)
 
@@ -52,14 +54,15 @@ Exceptions:
 
 ## Typography
 
-| Role | Size | Weight | Line Height |
-|------|------|--------|-------------|
-| Body | 14px | 400 (regular) | 1.5 |
-| Label | 12px | 400 (regular) | 1.5 |
-| Heading | 16px | 600 (semibold) | 1.2 |
-| Display | 24px | 400 (regular) | 1.2 |
+| Role    | Size | Weight         | Line Height |
+| ------- | ---- | -------------- | ----------- |
+| Body    | 14px | 400 (regular)  | 1.5         |
+| Label   | 12px | 400 (regular)  | 1.5         |
+| Heading | 16px | 600 (semibold) | 1.2         |
+| Display | 24px | 400 (regular)  | 1.2         |
 
 **Typography Notes:**
+
 - 正文使用 14px，符合 Ant Design 默认设置
 - 标题使用 16px semibold，与 ArticleList 保持一致
 - Display 用于打字区域的主要汉字显示（参考 Grid.tsx 的 24px）
@@ -69,7 +72,7 @@ Exceptions:
 ## Color
 
 | Role | Value | Usage |
-|------|-------|-------|
+| --- | --- | --- |
 | Dominant (60%) | #f5f5f5 | Background, surfaces |
 | Secondary (30%) | #ffffff | Cards, input area, panel backgrounds |
 | Accent (10%) | #1890ff | Current position highlight, progress bar, primary buttons |
@@ -80,6 +83,7 @@ Exceptions:
 | Text Disabled | #bfbfbf | Disabled state, empty state secondary text |
 
 Accent reserved for:
+
 - 当前输入位置的下划线高亮
 - Progress 进度条
 - 文章选中状态的左侧边框
@@ -90,7 +94,7 @@ Accent reserved for:
 ## Copywriting Contract
 
 | Element | Copy |
-|---------|------|
+| --- | --- |
 | Primary CTA | 开始练习 (选择文章后进入打字模式) |
 | Empty state heading | 请先选择一篇文章 |
 | Empty state body | 点击左上角菜单按钮，选择或上传一篇文章开始练习 |
@@ -110,24 +114,24 @@ Accent reserved for:
 
 ### New Components for Phase 2
 
-| Component | Purpose | Source |
-|-----------|---------|--------|
-| `TypingGame` | 整篇文章打字主组件 | 新建 |
-| `ArticleDisplay` | 文章原文展示区域 | 新建 |
-| `CharSpan` | 单个字符渲染（带状态样式） | 新建 |
-| `ProgressBar` | 进度指示器 | Ant Design Progress |
-| `useTypingGame` hook | 打字逻辑状态管理 | 新建 |
+| Component            | Purpose                    | Source              |
+| -------------------- | -------------------------- | ------------------- |
+| `TypingGame`         | 整篇文章打字主组件         | 新建                |
+| `ArticleDisplay`     | 文章原文展示区域           | 新建                |
+| `CharSpan`           | 单个字符渲染（带状态样式） | 新建                |
+| `ProgressBar`        | 进度指示器                 | Ant Design Progress |
+| `useTypingGame` hook | 打字逻辑状态管理           | 新建                |
 
 ### Existing Components to Reuse
 
-| Component | Usage |
-|-----------|-------|
-| `ArticleList` | 文章选择 Drawer |
-| Ant Design `Button` | 跳过、重置按钮 |
-| Ant Design `Progress` | 进度条 |
-| Ant Design `Typography` | 标题、文本 |
-| Ant Design `message` | 完成提示 |
-| Ant Design `Drawer` | 文章选择面板 |
+| Component               | Usage           |
+| ----------------------- | --------------- |
+| `ArticleList`           | 文章选择 Drawer |
+| Ant Design `Button`     | 跳过、重置按钮  |
+| Ant Design `Progress`   | 进度条          |
+| Ant Design `Typography` | 标题、文本      |
+| Ant Design `message`    | 完成提示        |
+| Ant Design `Drawer`     | 文章选择面板    |
 
 ---
 
@@ -135,13 +139,13 @@ Accent reserved for:
 
 ### Character States (CharSpan)
 
-| State | Color | Style |
-|-------|-------|-------|
-| Pending | #8c8c8c | 默认灰色，待输入 |
-| Current | inherit + #1890ff | 蓝色下划线 + 闪烁光标动画 |
-| Correct | #52c41a | 绿色，已完成正确 |
+| State     | Color                  | Style                     |
+| --------- | ---------------------- | ------------------------- |
+| Pending   | #8c8c8c                | 默认灰色，待输入          |
+| Current   | inherit + #1890ff      | 蓝色下划线 + 闪烁光标动画 |
+| Correct   | #52c41a                | 绿色，已完成正确          |
 | Incorrect | #ff4d4f + line-through | 红色删除线 + 显示错误拼音 |
-| Skipped | #bfbfbf | 浅灰色，已跳过 |
+| Skipped   | #bfbfbf                | 浅灰色，已跳过            |
 
 ### Visual Feedback Patterns
 
@@ -163,11 +167,11 @@ Accent reserved for:
 
 ## Keyboard Interactions
 
-| Key | Action |
-|-----|--------|
-| ESC | 跳过当前字符 |
-| Tab | (禁用，保持焦点在输入框) |
-| Composition Events | 处理中文输入法 |
+| Key                | Action                   |
+| ------------------ | ------------------------ |
+| ESC                | 跳过当前字符             |
+| Tab                | (禁用，保持焦点在输入框) |
+| Composition Events | 处理中文输入法           |
 
 ---
 
@@ -193,10 +197,10 @@ Accent reserved for:
 
 ## Registry Safety
 
-| Registry | Blocks Used | Safety Gate |
-|----------|-------------|-------------|
-| shadcn official | none | not applicable |
-| Third-party | none | not applicable |
+| Registry        | Blocks Used | Safety Gate    |
+| --------------- | ----------- | -------------- |
+| shadcn official | none        | not applicable |
+| Third-party     | none        | not applicable |
 
 **Note:** 本项目使用 Ant Design 作为 UI 组件库，不需要 shadcn registry。
 
@@ -204,26 +208,26 @@ Accent reserved for:
 
 ## Accessibility
 
-| Requirement | Implementation |
-|-------------|----------------|
-| Color contrast | 所有文本对比度 >= 4.5:1 (WCAG AA) |
-| Focus indicator | 当前输入位置有明确视觉指示 |
-| Error feedback | 错误字符有颜色 + 删除线双重提示 |
-| Progress indication | 同时显示百分比和具体数字 |
-| Keyboard navigation | ESC 跳过，Tab 禁用防止焦点丢失 |
+| Requirement         | Implementation                    |
+| ------------------- | --------------------------------- |
+| Color contrast      | 所有文本对比度 >= 4.5:1 (WCAG AA) |
+| Focus indicator     | 当前输入位置有明确视觉指示        |
+| Error feedback      | 错误字符有颜色 + 删除线双重提示   |
+| Progress indication | 同时显示百分比和具体数字          |
+| Keyboard navigation | ESC 跳过，Tab 禁用防止焦点丢失    |
 
 ---
 
 ## Pre-Populated From
 
-| Source | Decisions Used |
-|--------|---------------|
-| REQUIREMENTS.md | UI-01~05 需求定义 |
-| RESEARCH.md | 字符状态模式、颜色规范、组件架构 |
-| components.json | N/A (使用 Ant Design) |
-| ArticleList/index.module.less | 间距、字体、颜色参考 |
-| Grid.module.less | 字符状态样式参考 |
-| User input | 无 (全部从上下文推断) |
+| Source                        | Decisions Used                   |
+| ----------------------------- | -------------------------------- |
+| REQUIREMENTS.md               | UI-01~05 需求定义                |
+| RESEARCH.md                   | 字符状态模式、颜色规范、组件架构 |
+| components.json               | N/A (使用 Ant Design)            |
+| ArticleList/index.module.less | 间距、字体、颜色参考             |
+| Grid.module.less              | 字符状态样式参考                 |
+| User input                    | 无 (全部从上下文推断)            |
 
 ---
 

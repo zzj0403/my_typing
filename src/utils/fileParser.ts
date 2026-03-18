@@ -16,7 +16,7 @@ export class FileParseError extends Error {
 export function isValidTxtFile(file: File): boolean {
   const validExtensions = ['.txt']
   const fileName = file.name.toLowerCase()
-  return validExtensions.some(ext => fileName.endsWith(ext))
+  return validExtensions.some((ext) => fileName.endsWith(ext))
 }
 
 /**

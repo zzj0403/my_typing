@@ -21,9 +21,9 @@ affects: [hero-page, typing-mode]
 tech-stack:
   added: []
   patterns:
-    - "Drawer pattern for modal article selection"
-    - "Article to TextConfig conversion for TextRegister integration"
-    - "Category-based filtering with source mapping"
+    - 'Drawer pattern for modal article selection'
+    - 'Article to TextConfig conversion for TextRegister integration'
+    - 'Category-based filtering with source mapping'
 
 key-files:
   created:
@@ -36,13 +36,13 @@ key-files:
     - src/stores/articleStore.ts
 
 key-decisions:
-  - "Use Drawer component for article list display instead of separate page"
-  - "Convert ü to v in pinyin for keyboard input compatibility"
-  - "Filter poems/quotes by ID prefix (poem-/quote-)"
+  - 'Use Drawer component for article list display instead of separate page'
+  - 'Convert ü to v in pinyin for keyboard input compatibility'
+  - 'Filter poems/quotes by ID prefix (poem-/quote-)'
 
 patterns-established:
-  - "Pattern 1: Article to TextConfig conversion bridges store and TextRegister"
-  - "Pattern 2: Category tabs filter by source and ID prefix"
+  - 'Pattern 1: Article to TextConfig conversion bridges store and TextRegister'
+  - 'Pattern 2: Category tabs filter by source and ID prefix'
 
 requirements-completed: [ART-01, ART-05]
 
@@ -64,6 +64,7 @@ completed: 2026-03-17
 - **Files modified:** 6
 
 ## Accomplishments
+
 - Created ArticleList component with all UI interactions
 - Integrated ArticleList into Hero page via Drawer
 - Fixed pinyin ü -> v conversion for proper keyboard input
@@ -83,6 +84,7 @@ Each task was committed atomically:
 **Plan metadata:** (pending)
 
 ## Files Created/Modified
+
 - `src/components/ArticleList/types.ts` - Type definitions for ArticleCategory, ArticleListProps
 - `src/components/ArticleList/index.module.less` - Styles with active states and transitions
 - `src/components/ArticleList/index.tsx` - Main component with Upload, Tabs, List, Modal
@@ -91,6 +93,7 @@ Each task was committed atomically:
 - `src/stores/articleStore.ts` - Fixed ü -> v pinyin conversion
 
 ## Decisions Made
+
 - Used Drawer for article selection UX (better than separate page)
 - Filter poems/quotes by ID prefix since they share 'builtin' source
 - Convert ü to v in pinyin because standard keyboards don't have ü key
@@ -100,6 +103,7 @@ Each task was committed atomically:
 ### Auto-fixed Issues
 
 **1. [Rule 1 - Bug] Fixed pinyin ü -> v conversion**
+
 - **Found during:** Hero page integration
 - **Issue:** Pinyin library returns ü for 绿 (lv), but keyboard has no ü key
 - **Fix:** Added `.replace(/ü/g, 'v')` to quanpin in textToChars function
@@ -109,27 +113,30 @@ Each task was committed atomically:
 
 ---
 
-**Total deviations:** 1 auto-fixed (1 bug)
-**Impact on plan:** Essential fix for Chinese pinyin typing accuracy
+**Total deviations:** 1 auto-fixed (1 bug) **Impact on plan:** Essential fix for Chinese pinyin typing accuracy
 
 ## Issues Encountered
+
 None - all tasks completed as planned
 
 ## User Setup Required
+
 None - no external service configuration required.
 
 ## Next Phase Readiness
+
 - ArticleList component ready for use in typing practice flow
 - Users can now select articles from built-in or uploaded sources
 - Phase 1 complete - ready to proceed to Phase 2 (整篇文章打字模式)
 
 ---
-*Phase: 01-article-management*
-*Completed: 2026-03-17*
+
+_Phase: 01-article-management_ _Completed: 2026-03-17_
 
 ## Self-Check: PASSED
 
 **Verified:**
+
 - SUMMARY.md exists at `.planning/phases/01-article-management/01-06-SUMMARY.md`
 - All commits present:
   - `78b017d` docs(01-06): complete ArticleList UI plan

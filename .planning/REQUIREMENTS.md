@@ -1,7 +1,6 @@
 # Requirements: My Typing - 个人打字练习工具
 
-**Defined:** 2026-03-17
-**Core Value:** 能导入自己的文章 + 实时反馈 + 打完一篇
+**Defined:** 2026-03-17 **Core Value:** 能导入自己的文章 + 实时反馈 + 打完一篇
 
 ## v1 Requirements
 
@@ -47,40 +46,41 @@
 
 ## Out of Scope
 
-| Feature | Reason |
-|---------|--------|
-| 双拼支持 | 用户只用全拼 |
-| 中英文混合 | 纯中文练习 |
-| 社交功能 | 个人工具，无需社交 |
-| 云端同步 | 本地存储足够 |
-| 移动端适配 | 优先桌面端 |
+| Feature    | Reason             |
+| ---------- | ------------------ |
+| 双拼支持   | 用户只用全拼       |
+| 中英文混合 | 纯中文练习         |
+| 社交功能   | 个人工具，无需社交 |
+| 云端同步   | 本地存储足够       |
+| 移动端适配 | 优先桌面端         |
 
 ## Traceability
 
-| Requirement | Phase | Status |
-|-------------|-------|--------|
-| ART-01 | Phase 1 | Complete |
-| ART-02 | Phase 1 | Complete |
-| ART-03 | Phase 1 | Complete |
-| ART-04 | Phase 1 | Complete |
-| ART-05 | Phase 1 | Complete |
-| TYP-01 | Phase 2 | Complete |
-| TYP-02 | Phase 2 | Complete |
-| TYP-03 | Phase 2 | Complete |
-| TYP-04 | Phase 2 | Complete |
-| TYP-05 | Phase 2 | Complete |
-| TYP-06 | Phase 2 | Complete |
-| UI-01 | Phase 2 | Complete |
-| UI-02 | Phase 2 | Pending |
-| UI-03 | Phase 2 | Pending |
-| UI-04 | Phase 2 | Pending |
-| UI-05 | Phase 2 | Complete |
+| Requirement | Phase   | Status   |
+| ----------- | ------- | -------- |
+| ART-01      | Phase 1 | Complete |
+| ART-02      | Phase 1 | Complete |
+| ART-03      | Phase 1 | Complete |
+| ART-04      | Phase 1 | Complete |
+| ART-05      | Phase 1 | Complete |
+| TYP-01      | Phase 2 | Complete |
+| TYP-02      | Phase 2 | Complete |
+| TYP-03      | Phase 2 | Complete |
+| TYP-04      | Phase 2 | Complete |
+| TYP-05      | Phase 2 | Complete |
+| TYP-06      | Phase 2 | Complete |
+| UI-01       | Phase 2 | Complete |
+| UI-02       | Phase 2 | Pending  |
+| UI-03       | Phase 2 | Pending  |
+| UI-04       | Phase 2 | Pending  |
+| UI-05       | Phase 2 | Complete |
 
 **Coverage:**
+
 - v1 requirements: 16 total
 - Mapped to phases: 16
 - Unmapped: 0 ✓
 
 ---
-*Requirements defined: 2026-03-17*
-*Last updated: 2026-03-17 after project initialization*
+
+_Requirements defined: 2026-03-17_ _Last updated: 2026-03-17 after project initialization_

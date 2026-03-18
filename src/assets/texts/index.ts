@@ -1,7 +1,7 @@
-import './ChuShiBian';
-import './HelloWorld';
-import './Saying';
+import './ChuShiBian'
+import './HelloWorld'
+import './Saying'
 
 // 数据导出
-export { POEMS_DATA } from './Poems';
-export { QUOTES_DATA } from './Quotes';
+export { POEMS_DATA } from './Poems'
+export { QUOTES_DATA } from './Quotes'

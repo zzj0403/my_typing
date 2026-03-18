@@ -1,8 +1,6 @@
 # Roadmap: My Typing - 个人打字练习工具
 
-**Project:** 基于 https://github.com/yunsii/pinyin Fork
-**Strategy:** 增量开发，复用已有拼音匹配逻辑
-**Milestone:** v1.0 MVP - 可用的文章打字练习
+**Project:** 基于 https://github.com/yunsii/pinyin Fork **Strategy:** 增量开发，复用已有拼音匹配逻辑 **Milestone:** v1.0 MVP - 可用的文章打字练习
 
 ---
 
@@ -13,10 +11,12 @@
 **Plans:** 1 plan (1 complete)
 
 Plans:
+
 - [x] 00-01-PLAN.md — Fork 项目、清理双拼代码、验证运行
   - Summary: `.planning/phases/00-project-init/00-01-SUMMARY.md`
 
 **Success Criteria:**
+
 - 项目可本地启动
 - 基础打字功能正常
 - 代码中无双拼相关逻辑
@@ -30,6 +30,7 @@ Plans:
 **Plans:** 6 plans in 4 waves (6 complete)
 
 Plans:
+
 - [x] 01-01-PLAN.md — 测试基础设施 (Wave 0) — Vitest 配置和测试骨架
 - [x] 01-02-PLAN.md — 类型定义和分句函数 (Wave 1) — Article 类型 + splitIntoSentences
 - [x] 01-03-PLAN.md — 诗词数据 (Wave 1) — 25 首唐诗宋词
@@ -39,6 +40,7 @@ Plans:
   - Summary: `.planning/phases/01-article-management/01-06-SUMMARY.md`
 
 **Success Criteria:**
+
 - 可选择内置诗词/名言进行练习
 - 可上传自定义 txt 文件
 - 文章正确分句显示
@@ -54,6 +56,7 @@ Plans:
 **Plans:** 4/5 plans executed
 
 Plans:
+
 - [x] 02-00-PLAN.md — 测试基础设施 (Wave 0) — 测试骨架文件
   - Summary: `.planning/phases/02-article-typing-mode/02-00-SUMMARY.md`
 - [x] 02-01-PLAN.md — 类型定义和 Hook (Wave 1) — typing types + useTypingGame
@@ -64,6 +67,7 @@ Plans:
 - [ ] 02-04-PLAN.md — Hero 页面集成 (Wave 3) — TypingGame 替换 Hanzi
 
 **Success Criteria:**
+
 - 看着原文逐句打完整篇文章
 - 实时看到正确/错误反馈
 - 打错不会阻断，可继续
@@ -78,6 +82,7 @@ Plans:
 **Goal:** 优化用户体验，准备发布
 
 **Tasks:**
+
 - [ ] 优化界面布局和样式
 - [ ] 添加使用说明
 - [ ] 处理边界情况（空文章、超长文章）
@@ -86,6 +91,7 @@ Plans:
 - [ ] 测试多浏览器兼容性
 
 **Success Criteria:**
+
 - 界面清晰易用
 - 无明显 bug
 - 主流浏览器正常工作
@@ -95,11 +101,13 @@ Plans:
 ## Future Phases (v2)
 
 **Phase 4: 统计功能**
+
 - 打字速度统计
 - 准确率统计
 - 错字回顾
 
 **Phase 5: 历史记录**
+
 - 练习历史
 - 进度追踪
 
@@ -129,13 +137,12 @@ Phase 3 (UI优化)
 
 ## Risk Mitigation
 
-| Risk | Mitigation |
-|------|------------|
+| Risk                 | Mitigation                   |
+| -------------------- | ---------------------------- |
 | 参考项目代码难以理解 | 先阅读源码，理解拼音匹配流程 |
-| 分句逻辑复杂 | 从简单正则开始，迭代优化 |
-| 长文章性能问题 | 考虑虚拟滚动或分段渲染 |
+| 分句逻辑复杂         | 从简单正则开始，迭代优化     |
+| 长文章性能问题       | 考虑虚拟滚动或分段渲染       |
 
 ---
-*Roadmap created: 2026-03-17*
-*Estimated phases: 4 (v1) + 2 (v2)*
-*Last updated: 2026-03-18 - Phase 2 plans created*
+
+_Roadmap created: 2026-03-17_ _Estimated phases: 4 (v1) + 2 (v2)_ _Last updated: 2026-03-18 - Phase 2 plans created_

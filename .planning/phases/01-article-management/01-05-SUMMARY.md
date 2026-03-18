@@ -18,7 +18,8 @@ affects: [article-ui, typing-mode]
 # Tech tracking
 tech-stack:
   added: [zustand, uuid, pinyin-pro]
-  patterns: [zustand-persist-middleware, partialize-pattern, auto-initialization]
+  patterns:
+    [zustand-persist-middleware, partialize-pattern, auto-initialization]
 
 key-files:
   created:
@@ -29,13 +30,13 @@ key-files:
     - package.json
 
 key-decisions:
-  - "Use Zustand persist middleware with partialize to only persist uploaded articles"
-  - "Builtin articles use key as id, uploaded articles use uuid"
-  - "Initialize builtin articles on client-side only (typeof window check)"
+  - 'Use Zustand persist middleware with partialize to only persist uploaded articles'
+  - 'Builtin articles use key as id, uploaded articles use uuid'
+  - 'Initialize builtin articles on client-side only (typeof window check)'
 
 patterns-established:
-  - "Pattern: Zustand store with persist middleware and partialize for selective persistence"
-  - "Pattern: Auto-initialization pattern with window check for SSR compatibility"
+  - 'Pattern: Zustand store with persist middleware and partialize for selective persistence'
+  - 'Pattern: Auto-initialization pattern with window check for SSR compatibility'
 
 requirements-completed: [ART-05]
 
@@ -108,8 +109,8 @@ None - no external service configuration required.
 - 25 首诗词 + 32 条名言数据已集成
 
 ---
-*Phase: 01-article-management*
-*Completed: 2026-03-17*
+
+_Phase: 01-article-management_ _Completed: 2026-03-17_
 
 ## Self-Check: PASSED
 

@@ -3,5 +3,8 @@
   "granularity": "coarse",
   "gitTracking": true,
   "autoCommit": true,
-  "parallelization": true
+  "parallelization": true,
+  "workflow": {
+    "_auto_chain_active": false
+  }
 }

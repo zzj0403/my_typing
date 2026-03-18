@@ -23,14 +23,14 @@ created: 2026-03-18
 ## Per-Task Verification Map
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
-|---------|------|------|-------------|-----------|-------------------|-------------|--------|
+| --- | --- | --- | --- | --- | --- | --- | --- |
 | 02-01-01 | 01 | 1 | TYP-02, TYP-03, TYP-04, TYP-05, UI-05 | unit | `npm run test -- tests/hooks/useTypingGame.test.ts` | ❌ W0 | ⬜ pending |
 | 02-02-01 | 02 | 1 | UI-02, UI-03, UI-04 | unit | `npm run test -- tests/components/CharSpan.test.tsx` | ❌ W0 | ⬜ pending |
 | 02-03-01 | 03 | 2 | TYP-01 | integration | `npm run test -- tests/components/TypingGame.test.tsx` | ❌ W0 | ⬜ pending |
 | 02-03-02 | 03 | 2 | TYP-06 | integration | `npm run test -- tests/components/TypingGame.test.tsx` | ❌ W0 | ⬜ pending |
 | 02-04-01 | 04 | 3 | UI-01, UI-05 | integration | Manual + `npm run test` | N/A | ⬜ pending |
 
-*Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
+_Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky_
 
 ---
 

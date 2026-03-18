@@ -17,7 +17,7 @@ reviewed_at: 2026-03-17
 ## Design System
 
 | Property | Value |
-|----------|-------|
+| --- | --- |
 | Tool | none |
 | Preset | not applicable |
 | Component library | Ant Design 4.24.16 |
@@ -32,17 +32,18 @@ reviewed_at: 2026-03-17
 
 Declared values (must be multiples of 4):
 
-| Token | Value | Usage |
-|-------|-------|-------|
-| xs | 4px | Icon gaps, inline padding |
-| sm | 8px | Compact element spacing |
-| md | 16px | Default element spacing |
-| lg | 24px | Section padding, container padding |
-| xl | 32px | Layout gaps |
-| 2xl | 48px | Major section breaks |
-| 3xl | 64px | Page-level spacing |
+| Token | Value | Usage                              |
+| ----- | ----- | ---------------------------------- |
+| xs    | 4px   | Icon gaps, inline padding          |
+| sm    | 8px   | Compact element spacing            |
+| md    | 16px  | Default element spacing            |
+| lg    | 24px  | Section padding, container padding |
+| xl    | 32px  | Layout gaps                        |
+| 2xl   | 48px  | Major section breaks               |
+| 3xl   | 64px  | Page-level spacing                 |
 
 Exceptions:
+
 - 文章列表项最小点击高度 44px（可访问性要求）
 - Upload 拖拽区域最小高度 120px
 
@@ -50,12 +51,12 @@ Exceptions:
 
 ## Typography
 
-| Role | Size | Weight | Line Height |
-|------|------|--------|-------------|
-| Body | 14px | 400 (regular) | 1.5715 (Ant Design default) |
-| Label | 14px | 400 (regular) | 1.5715 |
-| Heading | 16px | 600 (semibold) | 1.35 |
-| Display | 120px | 400 (regular) | 1.0 |
+| Role    | Size  | Weight         | Line Height                 |
+| ------- | ----- | -------------- | --------------------------- |
+| Body    | 14px  | 400 (regular)  | 1.5715 (Ant Design default) |
+| Label   | 14px  | 400 (regular)  | 1.5715                      |
+| Heading | 16px  | 600 (semibold) | 1.35                        |
+| Display | 120px | 400 (regular)  | 1.0                         |
 
 **Note:** 字体大小遵循 Ant Design 默认规范。Display 尺寸用于 Hanzi 汉字展示组件（已存在）。
 
@@ -64,18 +65,20 @@ Exceptions:
 ## Color
 
 | Role | Value | Usage |
-|------|-------|-------|
+| --- | --- | --- |
 | Dominant (60%) | #f0f2f5 | Background, surfaces (Ant Design @background-color-light) |
 | Secondary (30%) | #ffffff | Cards, list items, modals |
 | Accent (10%) | #1890ff | Primary buttons, active states, links, upload hover |
 | Destructive | #ff4d4f | Delete buttons only |
 
 Accent reserved for:
+
 - 上传按钮（主操作按钮）
 - 文章列表选中状态
 - 链接 hover 状态
 
 **Ant Design Theme Variables:**
+
 - `@primary-color: #1890ff`
 - `@error-color: #ff4d4f`
 - `@background-color-light: #f0f2f5`
@@ -85,7 +88,7 @@ Accent reserved for:
 ## Copywriting Contract
 
 | Element | Copy |
-|---------|------|
+| --- | --- |
 | Primary CTA | 上传文章 |
 | Empty state heading | 暂无上传文章 |
 | Empty state body | 点击「上传文章」按钮导入 txt 文件，或选择下方内置诗词/名言开始练习 |
@@ -93,6 +96,7 @@ Accent reserved for:
 | Destructive confirmation | 删除文章：确认删除「{文章标题}」吗？此操作不可恢复 |
 
 **Copy rules:**
+
 - 使用中文简体
 - 保持简洁明确
 - 错误信息提供具体原因和解决方向
@@ -101,10 +105,10 @@ Accent reserved for:
 
 ## Registry Safety
 
-| Registry | Blocks Used | Safety Gate |
-|----------|-------------|-------------|
-| shadcn official | none | not applicable |
-| third-party | none | not applicable |
+| Registry        | Blocks Used | Safety Gate    |
+| --------------- | ----------- | -------------- |
+| shadcn official | none        | not applicable |
+| third-party     | none        | not applicable |
 
 **Note:** 本阶段不使用 shadcn，仅使用项目已安装的 Ant Design 组件。
 
@@ -114,22 +118,22 @@ Accent reserved for:
 
 ### Phase 1 Required Components
 
-| Component | Source | Purpose |
-|-----------|--------|---------|
-| ArticleList | New (src/components/ArticleList/) | 文章列表选择 UI |
-| FileUpload | New (src/components/FileUpload/) | txt 文件上传 |
-| Button | antd | 上传触发、删除操作 |
-| Upload.Dragger | antd | 拖拽上传区域 |
-| List | antd | 文章列表渲染 |
-| Modal.confirm | antd | 删除确认弹窗 |
-| Empty | antd | 空状态展示 |
-| message | antd | 操作反馈提示 |
+| Component      | Source                            | Purpose            |
+| -------------- | --------------------------------- | ------------------ |
+| ArticleList    | New (src/components/ArticleList/) | 文章列表选择 UI    |
+| FileUpload     | New (src/components/FileUpload/)  | txt 文件上传       |
+| Button         | antd                              | 上传触发、删除操作 |
+| Upload.Dragger | antd                              | 拖拽上传区域       |
+| List           | antd                              | 文章列表渲染       |
+| Modal.confirm  | antd                              | 删除确认弹窗       |
+| Empty          | antd                              | 空状态展示         |
+| message        | antd                              | 操作反馈提示       |
 
 ### Existing Components to Reuse
 
-| Component | Path | Purpose |
-|-----------|------|---------|
-| Hanzi | src/components/Hanzi/ | 汉字展示（Phase 2 使用） |
+| Component | Path                  | Purpose                  |
+| --------- | --------------------- | ------------------------ |
+| Hanzi     | src/components/Hanzi/ | 汉字展示（Phase 2 使用） |
 
 ---
 
@@ -137,32 +141,32 @@ Accent reserved for:
 
 ### Article List
 
-| Property | Value |
-|----------|-------|
-| Layout | 垂直列表 |
-| Item height | min 44px |
-| Selection | 单选，点击选中 |
-| Active state | 背景色 #e6f7ff，左侧 2px primary-color 边框 |
-| Hover state | 背景色 #f5f5f5 |
-| Delete action | 悬浮显示删除图标，仅对上传文章显示 |
+| Property      | Value                                       |
+| ------------- | ------------------------------------------- |
+| Layout        | 垂直列表                                    |
+| Item height   | min 44px                                    |
+| Selection     | 单选，点击选中                              |
+| Active state  | 背景色 #e6f7ff，左侧 2px primary-color 边框 |
+| Hover state   | 背景色 #f5f5f5                              |
+| Delete action | 悬浮显示删除图标，仅对上传文章显示          |
 
 ### File Upload
 
-| Property | Value |
-|----------|-------|
-| Accept | .txt only |
-| Max size | 100KB (102400 bytes) |
-| Encoding | UTF-8 |
-| Drag area | 拖拽或点击上传 |
-| Feedback | message.success / message.error |
+| Property  | Value                           |
+| --------- | ------------------------------- |
+| Accept    | .txt only                       |
+| Max size  | 100KB (102400 bytes)            |
+| Encoding  | UTF-8                           |
+| Drag area | 拖拽或点击上传                  |
+| Feedback  | message.success / message.error |
 
 ### Category Tabs
 
-| Property | Value |
-|----------|-------|
+| Property   | Value                         |
+| ---------- | ----------------------------- |
 | Categories | 全部 / 诗词 / 名言 / 我的上传 |
-| Default | 全部 |
-| Style | Ant Design Tabs (line type) |
+| Default    | 全部                          |
+| Style      | Ant Design Tabs (line type)   |
 
 ---
 
@@ -192,25 +196,25 @@ Accent reserved for:
 
 ## State Indicators
 
-| State | Visual |
-|-------|--------|
-| Loading | Spin 组件，居中显示 |
-| Empty | Empty 组件 + 引导文案 |
-| Error | message.error 顶部提示 |
-| Success | message.success 顶部提示 |
+| State    | Visual                        |
+| -------- | ----------------------------- |
+| Loading  | Spin 组件，居中显示           |
+| Empty    | Empty 组件 + 引导文案         |
+| Error    | message.error 顶部提示        |
+| Success  | message.success 顶部提示      |
 | Selected | 列表项高亮背景 + 左侧蓝色边框 |
 
 ---
 
 ## Accessibility Requirements
 
-| Requirement | Implementation |
-|-------------|----------------|
-| 键盘导航 | Tab 切换，Enter 选择 |
-| Focus visible | Ant Design 默认 focus 样式 |
-| Min touch target | 44px x 44px |
-| Color contrast | WCAG AA (4.5:1 for text) |
-| Screen reader | aria-label for icon buttons |
+| Requirement      | Implementation              |
+| ---------------- | --------------------------- |
+| 键盘导航         | Tab 切换，Enter 选择        |
+| Focus visible    | Ant Design 默认 focus 样式  |
+| Min touch target | 44px x 44px                 |
+| Color contrast   | WCAG AA (4.5:1 for text)    |
+| Screen reader    | aria-label for icon buttons |
 
 ---
 

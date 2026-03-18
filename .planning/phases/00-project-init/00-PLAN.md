@@ -17,42 +17,37 @@ user_setup: []
 
 must_haves:
   truths:
-    - "pnpm dev 命令成功启动开发服务器"
-    - "浏览器访问 localhost:8000 无报错显示打字界面"
-    - "输入全拼可以匹配汉字"
-    - "代码中无双拼相关逻辑残留"
+    - 'pnpm dev 命令成功启动开发服务器'
+    - '浏览器访问 localhost:8000 无报错显示打字界面'
+    - '输入全拼可以匹配汉字'
+    - '代码中无双拼相关逻辑残留'
   artifacts:
-    - path: "package.json"
-      provides: "项目依赖配置"
+    - path: 'package.json'
+      provides: '项目依赖配置'
       contains: '"vite"'
-    - path: "src/core/Pinyin.ts"
-      provides: "拼音枚举定义"
-      contains: "enum Quanpin"
-    - path: "src/assets/schemes/index.ts"
-      provides: "方案注册入口"
+    - path: 'src/core/Pinyin.ts'
+      provides: '拼音枚举定义'
+      contains: 'enum Quanpin'
+    - path: 'src/assets/schemes/index.ts'
+      provides: '方案注册入口'
       min_lines: 1
   key_links:
-    - from: "src/assets/schemes/index.ts"
-      to: "双拼方案文件"
-      via: "import 语句"
-      pattern: "不应存在 import.*XianHe"
-    - from: "src/core/Pinyin.ts"
-      to: "双拼枚举"
-      via: "枚举定义"
-      pattern: "不应存在 enum Shuangpin"
+    - from: 'src/assets/schemes/index.ts'
+      to: '双拼方案文件'
+      via: 'import 语句'
+      pattern: '不应存在 import.*XianHe'
+    - from: 'src/core/Pinyin.ts'
+      to: '双拼枚举'
+      via: '枚举定义'
+      pattern: '不应存在 enum Shuangpin'
 ---
 
 <objective>
 Fork 参考项目 yunsii/pinyin 到本地，安装依赖，清理双拼相关代码，验证基础全拼打字功能正常工作。
 
-Purpose: 建立干净的开发环境，移除不需要的双拼功能，为后续开发做准备
-Output: 可运行的全拼打字练习项目
-</objective>
+Purpose: 建立干净的开发环境，移除不需要的双拼功能，为后续开发做准备 Output: 可运行的全拼打字练习项目 </objective>
 
-<execution_context>
-@/root/.claude/get-shit-done/workflows/execute-plan.md
-@/root/.claude/get-shit-done/templates/summary.md
-</execution_context>
+<execution_context> @/root/.claude/get-shit-done/workflows/execute-plan.md @/root/.claude/get-shit-done/templates/summary.md </execution_context>
 
 <context>
 @.planning/PROJECT.md
@@ -102,6 +97,7 @@ Output: 可运行的全拼打字练习项目
        ```
 
     注意: 不要删除 .planning 目录，这是项目规划文件
+
   </action>
   <verify>
     <automated>test -f /root/my_typing/package.json && test -d /root/my_typing/node_modules && echo "OK" || echo "FAIL"</automated>
@@ -142,6 +138,7 @@ Output: 可运行的全拼打字练习项目
        ```
 
     注意: 文件不能为空，但可以只包含注释
+
   </action>
   <verify>
     <automated>test ! -f /root/my_typing/src/assets/schemes/XianHe.ts && echo "OK" || echo "FAIL"</automated>
@@ -186,6 +183,7 @@ Output: 可运行的全拼打字练习项目
     - 删除所有 `ZeroShengmu` 相关代码
     - 删除所有 `ShengmuList` 相关代码
     - 文件中应该只剩下 `Quanpin` 枚举
+
   </action>
   <verify>
     <automated>grep -c "enum Shuangpin" /root/my_typing/src/core/Pinyin.ts || echo "OK"</automated>
@@ -231,6 +229,7 @@ Output: 可运行的全拼打字练习项目
        ```
 
     注意: 只删除双拼相关的导出，保留其他所有导出
+
   </action>
   <verify>
     <automated>grep -E "Shuangpin|ZeroShengmu" /root/my_typing/src/core/index.ts && echo "FAIL" || echo "OK"</automated>
@@ -306,6 +305,7 @@ Output: 可运行的全拼打字练习项目
        - getShengmu() 静态方法（如果有）
 
     注意: 参数名 schemaType 改为 _schemaType 表示未使用，保持签名兼容
+
   </action>
   <verify>
     <automated>grep -E "ShuangpinSchemaConfig|shuangPinSchemas|getShuangPinSchema" /root/my_typing/src/core/registers/PinyinSchemaRegister/index.ts && echo "FAIL" || echo "OK"</automated>
@@ -357,6 +357,7 @@ Output: 可运行的全拼打字练习项目
     - 不要删除文本选择功能
     - 不要删除核心打字逻辑
     - 只删除双拼方案选择相关代码
+
   </action>
   <verify>
     <automated>grep -c "schemaType" /root/my_typing/src/pages/Hero/index.tsx || echo "OK"</automated>
@@ -412,6 +413,7 @@ Output: 可运行的全拼打字练习项目
        - 检查页面正常显示
        - 输入拼音测试打字功能（如输入 "ni" 匹配 "你"）
        - 检查浏览器控制台无报错
+
   </action>
   <verify>
     <automated>grep -r "Shuangpin\|XianHe\|ZeroShengmu" /root/my_typing/src/ 2>/dev/null | wc -l</automated>
@@ -445,6 +447,7 @@ Output: 可运行的全拼打字练习项目
 ## Phase 0 验证清单
 
 ### 自动化验证
+
 - [ ] grep -r "Shuangpin" src/ 无结果
 - [ ] grep -r "XianHe" src/ 无结果
 - [ ] grep -r "ZeroShengmu" src/ 无结果
@@ -452,18 +455,18 @@ Output: 可运行的全拼打字练习项目
 - [ ] pnpm dev 启动成功
 
 ### 手动验证
+
 - [ ] 浏览器访问 http://localhost:8000 正常显示
 - [ ] 输入全拼可匹配汉字
 - [ ] 标点符号可正常匹配
-- [ ] 浏览器控制台无报错
-</verification>
+- [ ] 浏览器控制台无报错 </verification>
 
 <success_criteria>
+
 - 项目可本地启动 (pnpm dev)
 - 基础打字功能正常（输入拼音匹配汉字）
 - 代码中无双拼相关逻辑（grep 验证通过）
-- 所有双拼相关文件已删除或清理
-</success_criteria>
+- 所有双拼相关文件已删除或清理 </success_criteria>
 
 <output>
 After completion, create `.planning/phases/00-project-init/00-01-SUMMARY.md`

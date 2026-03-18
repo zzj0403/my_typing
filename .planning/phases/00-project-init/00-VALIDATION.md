@@ -15,13 +15,13 @@ created: 2026-03-17
 
 ## Test Infrastructure
 
-| Property | Value |
-|----------|-------|
-| **Framework** | none — Phase 0 不引入测试框架 |
-| **Config file** | none |
-| **Quick run command** | `pnpm dev` (启动验证) |
-| **Full suite command** | `pnpm dev && 手动验证` |
-| **Estimated runtime** | ~30 seconds |
+| Property               | Value                         |
+| ---------------------- | ----------------------------- |
+| **Framework**          | none — Phase 0 不引入测试框架 |
+| **Config file**        | none                          |
+| **Quick run command**  | `pnpm dev` (启动验证)         |
+| **Full suite command** | `pnpm dev && 手动验证`        |
+| **Estimated runtime**  | ~30 seconds                   |
 
 **说明:** Phase 0 是项目初始化阶段，主要通过手动验证确保项目可正常运行。测试框架将在 Phase 1 引入 (Vitest)。
 
@@ -39,12 +39,12 @@ created: 2026-03-17
 ## Per-Task Verification Map
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
-|---------|------|------|-------------|-----------|-------------------|-------------|--------|
+| --- | --- | --- | --- | --- | --- | --- | --- |
 | 00-01-01 | 01 | 1 | 初始化 | manual | `pnpm dev` | ❌ W0 | ⬜ pending |
 | 00-01-02 | 01 | 1 | 清理双拼 | manual | `grep -r "Shuangpin" src/` | N/A | ⬜ pending |
 | 00-01-03 | 01 | 1 | 验证运行 | manual | 浏览器访问 localhost:8000 | N/A | ⬜ pending |
 
-*Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
+_Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky_
 
 ---
 
@@ -63,7 +63,7 @@ Phase 0 无需测试基础设施，使用以下手动验证：
 ## Manual-Only Verifications
 
 | Behavior | Requirement | Why Manual | Test Instructions |
-|----------|-------------|------------|-------------------|
+| --- | --- | --- | --- |
 | 项目启动 | 开发环境 | 需要浏览器交互 | `pnpm dev` → 打开 localhost:8000 |
 | 打字功能 | 基础功能 | 需要输入法交互 | 输入 "nihao" 验证匹配 "你好" |
 | 双拼清理 | 代码清理 | grep 静态检查 | `grep -r "Shuangpin\|双拼\|XianHe" src/` 应无结果 |

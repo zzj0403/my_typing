@@ -18,29 +18,35 @@ export interface CharSpanProps {
  */
 function getPinyin(char: CharInfo): string | null {
   if (char.type === CharType.Hanzi) {
-    return (char as { type: CharType.Hanzi; char: string; quanpin: string }).quanpin
+    return (char as { type: CharType.Hanzi; char: string; quanpin: string })
+      .quanpin
   }
   return null
 }
 
-export function CharSpan({ char, state, isCurrent, inputPinyin = '' }: CharSpanProps) {
+export function CharSpan({
+  char,
+  state,
+  isCurrent,
+  inputPinyin = '',
+}: CharSpanProps) {
   const pinyin = getPinyin(char)
-  const isCompleted = state === CharState.Correct || state === CharState.Incorrect || state === CharState.Skipped
+  const isCompleted =
+    state === CharState.Correct ||
+    state === CharState.Incorrect ||
+    state === CharState.Skipped
   const isHanzi = char.type === CharType.Hanzi
 
-  const className = classNames(
-    isHanzi ? styles.charBox : styles.markBox,
-    {
-      [styles.current]: isCurrent,
-      [styles.correct]: state === CharState.Correct,
-      [styles.incorrect]: state === CharState.Incorrect,
-      [styles.skipped]: state === CharState.Skipped,
-    }
-  )
+  const className = classNames(isHanzi ? styles.charBox : styles.markBox, {
+    [styles.current]: isCurrent,
+    [styles.correct]: state === CharState.Correct,
+    [styles.incorrect]: state === CharState.Incorrect,
+    [styles.skipped]: state === CharState.Skipped,
+  })
 
   // For completed characters, show the pinyin in the grid
   // For current character, show user input
-  const displayPinyin = isCompleted ? (pinyin || '') : inputPinyin
+  const displayPinyin = isCompleted ? pinyin || '' : inputPinyin
 
   // Punctuation marks - just show the character
   if (!isHanzi) {

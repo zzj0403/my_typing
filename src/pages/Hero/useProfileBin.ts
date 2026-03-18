@@ -34,12 +34,23 @@ export default function useProfileBin(defaultProgress: BinRecord['progress']) {
         inputTextIndex: 0,
         inputPinyin: '',
       }
-      const prevProgress = get(prevBin, 'progress', baseProgress) || baseProgress
+      const prevProgress =
+        get(prevBin, 'progress', baseProgress) || baseProgress
       const progress = {
-        schemaType: nextProgress.schemaType ?? prevProgress?.schemaType ?? baseProgress.schemaType,
-        textKey: nextProgress.textKey ?? prevProgress?.textKey ?? baseProgress.textKey,
-        inputTextIndex: nextProgress.inputTextIndex ?? prevProgress?.inputTextIndex ?? baseProgress.inputTextIndex,
-        inputPinyin: nextProgress.inputPinyin ?? prevProgress?.inputPinyin ?? baseProgress.inputPinyin,
+        schemaType:
+          nextProgress.schemaType ??
+          prevProgress?.schemaType ??
+          baseProgress.schemaType,
+        textKey:
+          nextProgress.textKey ?? prevProgress?.textKey ?? baseProgress.textKey,
+        inputTextIndex:
+          nextProgress.inputTextIndex ??
+          prevProgress?.inputTextIndex ??
+          baseProgress.inputTextIndex,
+        inputPinyin:
+          nextProgress.inputPinyin ??
+          prevProgress?.inputPinyin ??
+          baseProgress.inputPinyin,
       }
       return {
         name: nextName || prevBin?.name,

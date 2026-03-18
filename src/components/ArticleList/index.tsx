@@ -1,8 +1,16 @@
 import React, { useState, useCallback, useMemo } from 'react'
 import { List, Button, Upload, Tabs, Modal, Empty, message, Spin } from 'antd'
-import { DeleteOutlined, FileTextOutlined, UploadOutlined } from '@ant-design/icons'
+import {
+  DeleteOutlined,
+  FileTextOutlined,
+  UploadOutlined,
+} from '@ant-design/icons'
 import { useArticleStore } from '@/stores/articleStore'
-import { parseTxtFile, isValidTxtFile, FileParseError } from '@/utils/fileParser'
+import {
+  parseTxtFile,
+  isValidTxtFile,
+  FileParseError,
+} from '@/utils/fileParser'
 import type { Article, CreateArticleInput } from '@/types/article'
 import type { ArticleListProps, ArticleCategory } from './types'
 import { CATEGORY_SOURCE_MAP } from './types'
@@ -25,7 +33,8 @@ const ArticleList: React.FC<ArticleListProps> = ({
   onSelect,
   className,
 }) => {
-  const [activeCategory, setActiveCategory] = useState<ArticleCategory>(defaultCategory)
+  const [activeCategory, setActiveCategory] =
+    useState<ArticleCategory>(defaultCategory)
   const [uploading, setUploading] = useState(false)
 
   const {
@@ -43,75 +52,88 @@ const ArticleList: React.FC<ArticleListProps> = ({
       return articles
     }
     if (activeCategory === 'poems') {
-      return articles.filter(a => a.source === 'builtin' && a.id.startsWith('poem-'))
+      return articles.filter(
+        (a) => a.source === 'builtin' && a.id.startsWith('poem-'),
+      )
     }
     if (activeCategory === 'quotes') {
-      return articles.filter(a => a.source === 'builtin' && a.id.startsWith('quote-'))
+      return articles.filter(
+        (a) => a.source === 'builtin' && a.id.startsWith('quote-'),
+      )
     }
-    return articles.filter(a => a.source === source)
+    return articles.filter((a) => a.source === source)
   }, [articles, activeCategory])
 
   // 处理文章选择
-  const handleSelect = useCallback((article: Article) => {
-    selectArticle(article.id)
-    onSelect?.(article.id)
-  }, [selectArticle, onSelect])
+  const handleSelect = useCallback(
+    (article: Article) => {
+      selectArticle(article.id)
+      onSelect?.(article.id)
+    },
+    [selectArticle, onSelect],
+  )
 
   // 处理文件上传
-  const handleUpload = useCallback(async (file: File) => {
-    // 验证文件类型
-    if (!isValidTxtFile(file)) {
-      message.error('不支持的文件类型，请上传 .txt 文件')
-      return false
-    }
-
-    // 验证文件大小
-    if (file.size > MAX_FILE_SIZE) {
-      message.error('文件大小超过 100KB 限制')
-      return false
-    }
-
-    setUploading(true)
-    try {
-      const content = await parseTxtFile(file)
-      const input: CreateArticleInput = {
-        key: `upload-${Date.now()}`,
-        title: file.name.replace(/\.txt$/i, ''),
-        content,
-        source: 'upload',
+  const handleUpload = useCallback(
+    async (file: File) => {
+      // 验证文件类型
+      if (!isValidTxtFile(file)) {
+        message.error('不支持的文件类型，请上传 .txt 文件')
+        return false
       }
-      addArticle(input)
-      message.success('文章上传成功')
-      // 切换到"我的上传"分类
-      setActiveCategory('uploads')
-    } catch (error) {
-      if (error instanceof FileParseError) {
-        message.error(error.message)
-      } else {
-        message.error('文件读取失败，请确保文件为 UTF-8 编码的 txt 格式')
-      }
-    } finally {
-      setUploading(false)
-    }
 
-    return false // 阻止默认上传行为
-  }, [addArticle])
+      // 验证文件大小
+      if (file.size > MAX_FILE_SIZE) {
+        message.error('文件大小超过 100KB 限制')
+        return false
+      }
+
+      setUploading(true)
+      try {
+        const content = await parseTxtFile(file)
+        const input: CreateArticleInput = {
+          key: `upload-${Date.now()}`,
+          title: file.name.replace(/\.txt$/i, ''),
+          content,
+          source: 'upload',
+        }
+        addArticle(input)
+        message.success('文章上传成功')
+        // 切换到"我的上传"分类
+        setActiveCategory('uploads')
+      } catch (error) {
+        if (error instanceof FileParseError) {
+          message.error(error.message)
+        } else {
+          message.error('文件读取失败，请确保文件为 UTF-8 编码的 txt 格式')
+        }
+      } finally {
+        setUploading(false)
+      }
+
+      return false // 阻止默认上传行为
+    },
+    [addArticle],
+  )
 
   // 处理文章删除
-  const handleDelete = useCallback((article: Article, e: React.MouseEvent) => {
-    e.stopPropagation()
-    confirm({
-      title: '删除文章',
-      content: `确认删除「${article.title}」吗？此操作不可恢复`,
-      okText: '删除',
-      okType: 'danger',
-      cancelText: '取消',
-      onOk: () => {
-        removeArticle(article.id)
-        message.success('文章已删除')
-      },
-    })
-  }, [removeArticle])
+  const handleDelete = useCallback(
+    (article: Article, e: React.MouseEvent) => {
+      e.stopPropagation()
+      confirm({
+        title: '删除文章',
+        content: `确认删除「${article.title}」吗？此操作不可恢复`,
+        okText: '删除',
+        okType: 'danger',
+        cancelText: '取消',
+        onOk: () => {
+          removeArticle(article.id)
+          message.success('文章已删除')
+        },
+      })
+    },
+    [removeArticle],
+  )
 
   // 渲染文章项
   const renderArticleItem = (article: Article) => {
@@ -128,16 +150,18 @@ const ArticleList: React.FC<ArticleListProps> = ({
         <div className={styles.articleContent}>
           <div className={styles.articleTitle}>{article.title}</div>
           {article.description && (
-            <div className={styles.articleDescription}>{article.description}</div>
+            <div className={styles.articleDescription}>
+              {article.description}
+            </div>
           )}
         </div>
         {canDelete && (
           <Button
-            type="text"
+            type='text'
             icon={<DeleteOutlined />}
             className={styles.deleteButton}
             onClick={(e) => handleDelete(article, e)}
-            aria-label="删除文章"
+            aria-label='删除文章'
           />
         )}
       </div>
@@ -154,7 +178,8 @@ const ArticleList: React.FC<ArticleListProps> = ({
               <>
                 <div className={styles.emptyTitle}>暂无上传文章</div>
                 <div className={styles.emptyDescription}>
-                  点击「上传文章」按钮导入 txt 文件，或选择下方内置诗词/名言开始练习
+                  点击「上传文章」按钮导入 txt
+                  文件，或选择下方内置诗词/名言开始练习
                 </div>
               </>
             }
@@ -164,7 +189,7 @@ const ArticleList: React.FC<ArticleListProps> = ({
     }
     return (
       <div className={styles.emptyState}>
-        <Empty description="暂无文章" />
+        <Empty description='暂无文章' />
       </div>
     )
   }
@@ -175,7 +200,7 @@ const ArticleList: React.FC<ArticleListProps> = ({
       {showUpload && (
         <div className={styles.uploadArea}>
           <Upload
-            accept=".txt"
+            accept='.txt'
             showUploadList={false}
             beforeUpload={handleUpload}
           >
@@ -193,21 +218,21 @@ const ArticleList: React.FC<ArticleListProps> = ({
           onChange={(key) => setActiveCategory(key as ArticleCategory)}
           className={styles.tabs}
         >
-          <TabPane tab="全部" key="all" />
-          <TabPane tab="诗词" key="poems" />
-          <TabPane tab="名言" key="quotes" />
-          <TabPane tab="我的" key="uploads" />
+          <TabPane tab='全部' key='all' />
+          <TabPane tab='诗词' key='poems' />
+          <TabPane tab='名言' key='quotes' />
+          <TabPane tab='我的' key='uploads' />
         </Tabs>
       )}
 
       {/* 文章列表 */}
       {uploading ? (
         <div className={styles.loading}>
-          <Spin tip="上传中..." />
+          <Spin tip='上传中...' />
         </div>
       ) : filteredArticles.length > 0 ? (
         <div>
-          {filteredArticles.map(article => renderArticleItem(article))}
+          {filteredArticles.map((article) => renderArticleItem(article))}
         </div>
       ) : (
         renderEmpty()

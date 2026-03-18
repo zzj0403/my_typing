@@ -26,9 +26,11 @@ export default class PinyinSchemaRegister {
   }
 
   public getSchemaOptions() {
-    return [{
-      type: this.quanPinSchema.type,
-      displayName: this.quanPinSchema.displayName,
-    }]
+    return [
+      {
+        type: this.quanPinSchema.type,
+        displayName: this.quanPinSchema.displayName,
+      },
+    ]
   }
 }

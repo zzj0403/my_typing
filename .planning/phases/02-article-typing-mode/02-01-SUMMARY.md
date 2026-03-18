@@ -4,7 +4,8 @@ plan: 01
 subsystem: typing
 tags: [types, hook, tdd, pinyin, punctuation]
 requires: [02-00]
-provides: [useTypingGame, CharState, TypingChar, TypingProgress, PUNCTUATION_MAP]
+provides:
+  [useTypingGame, CharState, TypingChar, TypingProgress, PUNCTUATION_MAP]
 affects: []
 tech_stack:
   added: []
@@ -50,10 +51,12 @@ Created `src/types/typing.ts` with:
 ### Task 2: Implement useTypingGame hook with tests (TDD)
 
 **Commits:**
+
 - `fa84023` - RED: Failing tests for useTypingGame
 - `285e4ef` - GREEN: Implementation with all tests passing
 
 **Hook Features:**
+
 - `handleInput(value)`: Match pinyin for Hanzi (TYP-02), mark Correct/Incorrect (TYP-03, TYP-04)
 - `skipCurrent()`: Skip current character on ESC (TYP-04)
 - Punctuation mapping via PUNCTUATION_MAP (TYP-05)
@@ -62,6 +65,7 @@ Created `src/types/typing.ts` with:
 - `isComplete`: Boolean flag for completion
 
 **Test Coverage (6 tests):**
+
 1. Match pinyin for Hanzi characters
 2. Mark correct when pinyin matches
 3. Mark incorrect and continue
@@ -76,6 +80,7 @@ Created `src/types/typing.ts` with:
 ### Auto-fixed Issues
 
 **1. [Rule 1 - Bug] Fixed test assertion for wrong pinyin scenario**
+
 - **Found during:** Task 2 GREEN phase
 - **Issue:** Test expected `chars[1].state` to be Incorrect after input 'hao', but `chars[0]` is affected since currentIndex=0
 - **Fix:** Changed assertion from `chars[1]` to `chars[0]` with corrected comment
@@ -87,7 +92,7 @@ Created `src/types/typing.ts` with:
 ## Files Created/Modified
 
 | File | Action | Purpose |
-|------|--------|---------|
+| --- | --- | --- |
 | src/types/typing.ts | Created | CharState, TypingChar, TypingProgress, PUNCTUATION_MAP |
 | src/hooks/useTypingGame.ts | Created | Core typing game logic hook |
 | tests/hooks/useTypingGame.test.ts | Created | 6 unit tests for hook |

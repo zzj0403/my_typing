@@ -1,8 +1,6 @@
 # Phase 2: 整篇文章打字模式 - Research
 
-**Researched:** 2026-03-18
-**Domain:** React中文打字练习应用、拼音匹配、实时反馈、状态管理
-**Confidence:** HIGH
+**Researched:** 2026-03-18 **Domain:** React中文打字练习应用、拼音匹配、实时反馈、状态管理 **Confidence:** HIGH
 
 ## Summary
 
@@ -13,30 +11,33 @@
 ## Standard Stack
 
 ### Core
-| Library | Version | Purpose | Why Standard |
-|---------|---------|---------|--------------|
-| React | ^18.2.0 | UI框架 | 项目已使用 |
-| Zustand | ^5.0.12 | 状态管理 | Phase 1已集成，轻量高效 |
-| pinyin-pro | ^3.28.0 | 拼音转换 | 项目已使用，准确度高 |
-| Ant Design | ^4.24.16 | UI组件库 | 项目已使用 |
+
+| Library    | Version  | Purpose  | Why Standard            |
+| ---------- | -------- | -------- | ----------------------- |
+| React      | ^18.2.0  | UI框架   | 项目已使用              |
+| Zustand    | ^5.0.12  | 状态管理 | Phase 1已集成，轻量高效 |
+| pinyin-pro | ^3.28.0  | 拼音转换 | 项目已使用，准确度高    |
+| Ant Design | ^4.24.16 | UI组件库 | 项目已使用              |
 
 ### Supporting
-| Library | Version | Purpose | When to Use |
-|---------|---------|---------|-------------|
-| ahooks | ^3.7.0 | React Hooks工具集 | useControllableValue、useBoolean |
-| classnames | ^2.2.6 | 条件样式 | 字符状态样式切换 |
-| vitest | ^1.6.0 | 测试框架 | Phase 1已配置，单元测试 |
+
+| Library    | Version | Purpose           | When to Use                      |
+| ---------- | ------- | ----------------- | -------------------------------- |
+| ahooks     | ^3.7.0  | React Hooks工具集 | useControllableValue、useBoolean |
+| classnames | ^2.2.6  | 条件样式          | 字符状态样式切换                 |
+| vitest     | ^1.6.0  | 测试框架          | Phase 1已配置，单元测试          |
 
 ### Alternatives Considered
+
 | Instead of | Could Use | Tradeoff |
-|------------|-----------|----------|
+| --- | --- | --- |
 | react-typing-game-hook | 自定义状态管理 | react-typing-game-hook提供完整打字游戏逻辑，但本项目已有CharInfo体系，自定义更灵活 |
 | react-window | CSS分段渲染 | 仅超长文章（>500字）需虚拟滚动，初期可暂不引入 |
 
-**Installation:**
-无需新增依赖，所有核心库已安装。
+**Installation:** 无需新增依赖，所有核心库已安装。
 
 **Version verification:**
+
 ```
 React: 18.2.0 (package.json)
 Zustand: 5.0.12 (npm list)
@@ -48,6 +49,7 @@ vitest: 1.6.0 (package.json)
 ## Architecture Patterns
 
 ### Recommended Project Structure
+
 ```
 src/
 ├── components/
@@ -77,26 +79,27 @@ src/
 **When to use:** 需要实时反馈每个字符正确/错误时
 
 **Example:**
+
 ```typescript
 // types/typing.ts
 export enum CharState {
-  Pending = 'pending',     // 待输入
-  Correct = 'correct',     // 正确
+  Pending = 'pending', // 待输入
+  Correct = 'correct', // 正确
   Incorrect = 'incorrect', // 错误
-  Skipped = 'skipped',     // 已跳过
+  Skipped = 'skipped', // 已跳过
 }
 
 export interface TypingChar extends CharInfo {
   state: CharState
-  inputPinyin?: string  // 用户输入的拼音（用于错误标记）
+  inputPinyin?: string // 用户输入的拼音（用于错误标记）
 }
 
 // hooks/useTypingGame.ts
 export function useTypingGame(article: Article) {
   const [chars, setChars] = useState<TypingChar[]>(() =>
-    article.sentences.flatMap(s =>
-      s.chars.map(c => ({ ...c, state: CharState.Pending }))
-    )
+    article.sentences.flatMap((s) =>
+      s.chars.map((c) => ({ ...c, state: CharState.Pending })),
+    ),
   )
   const [currentIndex, setCurrentIndex] = useState(0)
   const [inputBuffer, setInputBuffer] = useState('')
@@ -125,15 +128,21 @@ export function useTypingGame(article: Article) {
   }
 
   const markCorrect = (index: number) => {
-    setChars(prev => prev.map((c, i) =>
-      i === index ? { ...c, state: CharState.Correct } : c
-    ))
+    setChars((prev) =>
+      prev.map((c, i) =>
+        i === index ? { ...c, state: CharState.Correct } : c,
+      ),
+    )
   }
 
   const markIncorrect = (index: number, input: string) => {
-    setChars(prev => prev.map((c, i) =>
-      i === index ? { ...c, state: CharState.Incorrect, inputPinyin: input } : c
-    ))
+    setChars((prev) =>
+      prev.map((c, i) =>
+        i === index
+          ? { ...c, state: CharState.Incorrect, inputPinyin: input }
+          : c,
+      ),
+    )
   }
 
   return {
@@ -156,6 +165,7 @@ export function useTypingGame(article: Article) {
 **When to use:** 需要支持中文拼音输入时
 
 **Example:**
+
 ```typescript
 // components/TypingGame/index.tsx
 export function TypingGame({ article }: { article: Article }) {
@@ -211,6 +221,7 @@ export function TypingGame({ article }: { article: Article }) {
 **When to use:** 需要逐字高亮显示输入状态时
 
 **Example:**
+
 ```typescript
 // components/TypingGame/CharSpan.tsx
 export function CharSpan({
@@ -282,7 +293,7 @@ export function CharSpan({
 ## Don't Hand-Roll
 
 | Problem | Don't Build | Use Instead | Why |
-|---------|-------------|-------------|-----|
+| --- | --- | --- | --- |
 | 拼音转换 | 自定义拼音映射表 | pinyin-pro 库 | 已集成，准确度高，处理多音字和 ü->v 转换 |
 | 文章分句 | 复杂正则分割 | splitIntoSentences (已有) | Phase 1已实现，支持 。！？；分隔符 |
 | 字符信息生成 | 手动构建 CharInfo | textToChars (已有) | articleStore 已实现，自动处理汉字和标点 |
@@ -299,6 +310,7 @@ export function CharSpan({
 **Why it happens:** 未正确处理 compositionstart/compositionend 事件，React 的 controlled input 会实时更新
 
 **How to avoid:**
+
 ```typescript
 const [isComposing, setIsComposing] = useState(false)
 
@@ -326,6 +338,7 @@ const handleCompositionEnd = (e: React.CompositionEvent) => {
 **Why it happens:** React 需要对比大量 DOM 节点，即使只有一个字符状态改变
 
 **How to avoid:**
+
 1. 使用 React.memo 包装 CharSpan 组件
 2. 按句子分割渲染，只重新渲染当前句子
 3. 对于超长文章（>1000字），考虑分页或虚拟滚动
@@ -365,6 +378,7 @@ const Sentence = React.memo(function Sentence({ sentence, isActive, ... }) {
 **Why it happens:** 键盘输入的是英文标点，文章中是中文标点，字符编码不一致
 
 **How to avoid:**
+
 1. 在 CharInfo 中标记标点类型（CharType.Mark）
 2. 建立英文标点到中文标点的映射表
 3. 允许英文标点匹配对应的中文标点
@@ -396,6 +410,7 @@ const handlePunctuation = (input: string, target: string) => {
 **Why it happens:** 进度状态未持久化，或 Zustand store 未正确配置
 
 **How to avoid:**
+
 ```typescript
 // stores/typingStore.ts
 interface TypingState {
@@ -420,8 +435,8 @@ export const useTypingStore = create<TypingState>()(
         articleId: state.articleId,
         currentIndex: state.currentIndex,
       }),
-    }
-  )
+    },
+  ),
 )
 ```
 
@@ -575,8 +590,8 @@ export interface TypingChar extends CharInfo {
 export function useTypingGame(article: Article | null) {
   const [chars, setChars] = useState<TypingChar[]>(() => {
     if (!article) return []
-    return article.sentences.flatMap(s =>
-      s.chars.map(c => ({ ...c, state: CharState.Pending }))
+    return article.sentences.flatMap((s) =>
+      s.chars.map((c) => ({ ...c, state: CharState.Pending })),
     )
   })
 
@@ -593,66 +608,77 @@ export function useTypingGame(article: Article | null) {
     ':': '：',
   }
 
-  const handleInput = useCallback((value: string) => {
-    if (!article || currentIndex >= chars.length) return
+  const handleInput = useCallback(
+    (value: string) => {
+      if (!article || currentIndex >= chars.length) return
 
-    // 开始计时
-    if (!startTime) {
-      setStartTime(Date.now())
-    }
-
-    const currentChar = chars[currentIndex]
-    let isCorrect = false
-
-    if (currentChar.type === CharType.Mark) {
-      // 标点匹配（支持英文标点映射）
-      isCorrect = value === currentChar.char ||
-                  punctuationMap[value] === currentChar.char
-    } else if (currentChar.type === CharType.Hanzi) {
-      // 拼音匹配（完全匹配）
-      isCorrect = value === currentChar.quanpin
-    }
-
-    setChars(prev => prev.map((c, i) => {
-      if (i !== currentIndex) return c
-      return {
-        ...c,
-        state: isCorrect ? CharState.Correct : CharState.Incorrect,
-        inputPinyin: isCorrect ? undefined : value,
+      // 开始计时
+      if (!startTime) {
+        setStartTime(Date.now())
       }
-    }))
 
-    // 移动到下一个字符（错误也可继续）
-    setCurrentIndex(prev => prev + 1)
-  }, [article, chars, currentIndex, startTime])
+      const currentChar = chars[currentIndex]
+      let isCorrect = false
+
+      if (currentChar.type === CharType.Mark) {
+        // 标点匹配（支持英文标点映射）
+        isCorrect =
+          value === currentChar.char ||
+          punctuationMap[value] === currentChar.char
+      } else if (currentChar.type === CharType.Hanzi) {
+        // 拼音匹配（完全匹配）
+        isCorrect = value === currentChar.quanpin
+      }
+
+      setChars((prev) =>
+        prev.map((c, i) => {
+          if (i !== currentIndex) return c
+          return {
+            ...c,
+            state: isCorrect ? CharState.Correct : CharState.Incorrect,
+            inputPinyin: isCorrect ? undefined : value,
+          }
+        }),
+      )
+
+      // 移动到下一个字符（错误也可继续）
+      setCurrentIndex((prev) => prev + 1)
+    },
+    [article, chars, currentIndex, startTime],
+  )
 
   const skipCurrent = useCallback(() => {
     if (currentIndex >= chars.length) return
 
-    setChars(prev => prev.map((c, i) =>
-      i === currentIndex
-        ? { ...c, state: CharState.Skipped }
-        : c
-    ))
-    setCurrentIndex(prev => prev + 1)
+    setChars((prev) =>
+      prev.map((c, i) =>
+        i === currentIndex ? { ...c, state: CharState.Skipped } : c,
+      ),
+    )
+    setCurrentIndex((prev) => prev + 1)
   }, [chars, currentIndex])
 
   const reset = useCallback(() => {
     if (!article) return
-    setChars(article.sentences.flatMap(s =>
-      s.chars.map(c => ({ ...c, state: CharState.Pending }))
-    ))
+    setChars(
+      article.sentences.flatMap((s) =>
+        s.chars.map((c) => ({ ...c, state: CharState.Pending })),
+      ),
+    )
     setCurrentIndex(0)
     setStartTime(null)
   }, [article])
 
-  const progress = useMemo(() => ({
-    typed: currentIndex,
-    total: chars.length,
-    correct: chars.filter(c => c.state === CharState.Correct).length,
-    incorrect: chars.filter(c => c.state === CharState.Incorrect).length,
-    skipped: chars.filter(c => c.state === CharState.Skipped).length,
-  }), [chars, currentIndex])
+  const progress = useMemo(
+    () => ({
+      typed: currentIndex,
+      total: chars.length,
+      correct: chars.filter((c) => c.state === CharState.Correct).length,
+      incorrect: chars.filter((c) => c.state === CharState.Incorrect).length,
+      skipped: chars.filter((c) => c.state === CharState.Skipped).length,
+    }),
+    [chars, currentIndex],
+  )
 
   return {
     chars,
@@ -672,12 +698,13 @@ export function useTypingGame(article: Article | null) {
 ## State of the Art
 
 | Old Approach | Current Approach | When Changed | Impact |
-|--------------|------------------|--------------|--------|
+| --- | --- | --- | --- |
 | 单字练习 | 整篇文章练习 | Phase 2 | 用户可以连续打完整篇文章，体验更流畅 |
 | 阻塞式错误 | 跳过式错误 | Phase 2 | 错误不阻断，用户可继续，标记错误即可 |
 | 无进度指示 | 实时进度 + 完成提示 | Phase 2 | 用户清楚当前进度，完成有成就感 |
 
 **Deprecated/outdated:**
+
 - 双拼支持：Phase 0 已移除，仅保留全拼
 - TextRegister.load()：手动加载拼音的方式已过时，使用 articleStore 自动生成
 
@@ -701,16 +728,18 @@ export function useTypingGame(article: Article | null) {
 ## Validation Architecture
 
 ### Test Framework
-| Property | Value |
-|----------|-------|
-| Framework | vitest 1.6.0 |
-| Config file | vitest.config.ts |
-| Quick run command | `npm run test` |
+
+| Property           | Value                 |
+| ------------------ | --------------------- |
+| Framework          | vitest 1.6.0          |
+| Config file        | vitest.config.ts      |
+| Quick run command  | `npm run test`        |
 | Full suite command | `npm run test` (same) |
 
 ### Phase Requirements → Test Map
+
 | Req ID | Behavior | Test Type | Automated Command | File Exists? |
-|--------|----------|-----------|-------------------|-------------|
+| --- | --- | --- | --- | --- |
 | TYP-01 | 看着原文逐句/逐段打字 | integration | `vitest run tests/components/TypingGame.test.tsx` | ❌ Wave 0 |
 | TYP-02 | 全拼输入匹配 | unit | `vitest run tests/hooks/useTypingGame.test.ts` | ❌ Wave 0 |
 | TYP-03 | 实时正确/错误反馈 | unit | `vitest run tests/hooks/useTypingGame.test.ts` | ❌ Wave 0 |
@@ -724,11 +753,13 @@ export function useTypingGame(article: Article | null) {
 | UI-05 | 进度指示（已打/总字数） | unit | `vitest run tests/hooks/useTypingGame.test.ts` | ❌ Wave 0 |
 
 ### Sampling Rate
+
 - **Per task commit:** `npm run test` (快速验证新增功能)
 - **Per wave merge:** `npm run test` (确保所有测试通过)
 - **Phase gate:** 全量测试通过 + 手动 UI 测试
 
 ### Wave 0 Gaps
+
 - [ ] `tests/hooks/useTypingGame.test.ts` — covers TYP-02, TYP-03, TYP-04, TYP-05, UI-05
 - [ ] `tests/components/TypingGame.test.tsx` — covers TYP-01, TYP-06
 - [ ] `tests/components/CharSpan.test.tsx` — covers UI-02, UI-03, UI-04
@@ -737,7 +768,7 @@ export function useTypingGame(article: Article | null) {
 ## Phase Requirements
 
 | ID | Description | Research Support |
-|----|-------------|-----------------|
+| --- | --- | --- |
 | TYP-01 | 看着原文逐句/逐段打字 | ArticleDisplay 组件展示原文，useTypingGame 管理逐字输入 |
 | TYP-02 | 全拼输入匹配 | 复用 CharInfo.quanpin，pinyin-pro 生成拼音 |
 | TYP-03 | 实时正确/错误反馈 | CharState 枚举 + CharSpan 组件条件样式 |
@@ -753,23 +784,26 @@ export function useTypingGame(article: Article | null) {
 ## Sources
 
 ### Primary (HIGH confidence)
+
 - react-typing-game-hook - GitHub: https://github.com/jokarz/react-typing-game-hook
 - React Composition Events - React Issue #8683: https://github.com/facebook/react/issues/8683
 - 本项目源码 - src/core/registers/TextRegister, src/stores/articleStore, src/pages/Hero
 
 ### Secondary (MEDIUM confidence)
+
 - React IME Composition Events - GitHub Discussions: https://github.com/orgs/community/discussions/185819
 - React State Management 2026 - Medium: https://medium.com/codetodeploy/15-react-concepts-every-frontend-engineer-must-know-in-2026-25549bb1656a
 
 ### Tertiary (LOW confidence)
+
 - React Performance Optimization - Stack Overflow (访问受限)
 
 ## Metadata
 
 **Confidence breakdown:**
+
 - Standard stack: HIGH - 所有库已安装并验证版本
 - Architecture: HIGH - 基于 react-typing-game-hook 成熟模式，适配本项目体系
 - Pitfalls: HIGH - 基于实际开发经验和社区最佳实践
 
-**Research date:** 2026-03-18
-**Valid until:** 2026-04-18 (1个月，React/Zustand 生态稳定)
+**Research date:** 2026-03-18 **Valid until:** 2026-04-18 (1个月，React/Zustand 生态稳定)

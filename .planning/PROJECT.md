@@ -36,15 +36,18 @@
 ## Context
 
 **源项目**: https://github.com/yunsii/pinyin (Fork)
+
 - 技术栈：TypeScript + Vite + React + Ant Design
 - 功能：拼音打字练习，支持全拼和双拼
 - 已有：拼音匹配逻辑、键盘提示、实时数据分析
 
 **痛点**:
+
 - 参考项目只能单字练习，无法整篇文章连续打
 - 无法导入自定义文章
 
 **用户期望**:
+
 - 用自己喜欢的内容（诗词、名言）练习
 - 看着原文打，获得即时反馈
 - 打完一篇有成就感
@@ -57,11 +60,12 @@
 
 ## Key Decisions
 
-| Decision | Rationale | Outcome |
-|----------|-----------|---------|
+| Decision      | Rationale                                        | Outcome   |
+| ------------- | ------------------------------------------------ | --------- |
 | Fork 参考项目 | 复用已实现的拼音匹配逻辑、UI框架，增量开发更高效 | — Pending |
-| 仅全拼支持 | 用户只用全拼，移除双拼简化代码 | — Pending |
-| 文章模式优先 | 核心差异化功能，单字模式保留但不强调 | — Pending |
+| 仅全拼支持    | 用户只用全拼，移除双拼简化代码                   | — Pending |
+| 文章模式优先  | 核心差异化功能，单字模式保留但不强调             | — Pending |
 
 ---
-*Last updated: 2026-03-17 after project initialization*
+
+_Last updated: 2026-03-17 after project initialization_

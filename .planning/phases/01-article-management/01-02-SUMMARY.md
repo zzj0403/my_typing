@@ -32,14 +32,14 @@ key-files:
     - src/utils/sentenceSplit.ts
 
 key-decisions:
-  - "CharInfo type reuses existing MarkCharConfig | HanziCharConfig from @/core"
-  - "Article includes key field for compatibility with existing TextConfig"
-  - "splitIntoSentences handles 。！？； as Chinese sentence terminators"
+  - 'CharInfo type reuses existing MarkCharConfig | HanziCharConfig from @/core'
+  - 'Article includes key field for compatibility with existing TextConfig'
+  - 'splitIntoSentences handles 。！？； as Chinese sentence terminators'
 
 patterns-established:
-  - "Type definitions in src/types/, co-located with tests in tests/types/"
-  - "Utility functions in src/utils/ with tests in tests/utils/"
-  - "TDD workflow: write tests first, implement minimal code to pass"
+  - 'Type definitions in src/types/, co-located with tests in tests/types/'
+  - 'Utility functions in src/utils/ with tests in tests/utils/'
+  - 'TDD workflow: write tests first, implement minimal code to pass'
 
 requirements-completed: [ART-04]
 
@@ -100,6 +100,7 @@ _Note: TDD tasks may have multiple commits (test - feat - refactor)_
 ### Auto-fixed Issues
 
 **1. [Rule 3 - Blocking] 修复 vite-tsconfig-paths 不兼容问题**
+
 - **Found during:** Task 1 (运行测试)
 - **Issue:** vite-tsconfig-paths@2.5.1 与 Vite 5 不兼容，导致测试无法运行
 - **Fix:** 移除 vite-tsconfig-paths 插件，创建独立的 vitest.config.ts 配置文件
@@ -109,8 +110,7 @@ _Note: TDD tasks may have multiple commits (test - feat - refactor)_
 
 ---
 
-**Total deviations:** 1 auto-fixed (1 blocking)
-**Impact on plan:** 必要修复，确保测试环境正常工作。无范围蔓延。
+**Total deviations:** 1 auto-fixed (1 blocking) **Impact on plan:** 必要修复，确保测试环境正常工作。无范围蔓延。
 
 ## Issues Encountered
 
@@ -127,5 +127,5 @@ None - 无外部服务配置要求。
 - 测试框架配置完成，后续计划可直接使用
 
 ---
-*Phase: 01-article-management*
-*Completed: 2026-03-17*
+
+_Phase: 01-article-management_ _Completed: 2026-03-17_

@@ -13,7 +13,9 @@ describe('CharSpan', () => {
   }
 
   it('should render pending character with grid (UI-02)', () => {
-    render(<CharSpan char={baseChar} state={CharState.Pending} isCurrent={false} />)
+    render(
+      <CharSpan char={baseChar} state={CharState.Pending} isCurrent={false} />,
+    )
     const hanzi = screen.getByText('你')
     const container = hanzi.parentElement
     expect(container?.className).not.toMatch(/current/)
@@ -25,21 +27,32 @@ describe('CharSpan', () => {
   })
 
   it('should render current character with highlight class (UI-02)', () => {
-    render(<CharSpan char={baseChar} state={CharState.Pending} isCurrent={true} />)
+    render(
+      <CharSpan char={baseChar} state={CharState.Pending} isCurrent={true} />,
+    )
     const hanzi = screen.getByText('你')
     const container = hanzi.parentElement
     expect(container?.className).toMatch(/current/)
   })
 
   it('should render correct character with green class (UI-03)', () => {
-    render(<CharSpan char={baseChar} state={CharState.Correct} isCurrent={false} />)
+    render(
+      <CharSpan char={baseChar} state={CharState.Correct} isCurrent={false} />,
+    )
     const hanzi = screen.getByText('你')
     const container = hanzi.parentElement
     expect(container?.className).toMatch(/correct/)
   })
 
   it('should render incorrect character with red and strikethrough (UI-04)', () => {
-    render(<CharSpan char={baseChar} state={CharState.Incorrect} isCurrent={false} inputPinyin="ta" />)
+    render(
+      <CharSpan
+        char={baseChar}
+        state={CharState.Incorrect}
+        isCurrent={false}
+        inputPinyin='ta'
+      />,
+    )
     const hanzi = screen.getByText('你')
     const container = hanzi.parentElement
     expect(container?.className).toMatch(/incorrect/)

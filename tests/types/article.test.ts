@@ -1,5 +1,11 @@
 import { describe, it, expect } from 'vitest'
-import type { Article, Sentence, CharInfo, ArticleSource, CreateArticleInput } from '@/types/article'
+import type {
+  Article,
+  Sentence,
+  CharInfo,
+  ArticleSource,
+  CreateArticleInput,
+} from '@/types/article'
 import { CharType } from '@/core'
 
 describe('Article Types', () => {
@@ -113,9 +119,7 @@ describe('Article Types', () => {
         key: 'test-article',
         title: '测试文章',
         content: '测试内容',
-        sentences: [
-          { id: 's1', text: '测试内容', chars: [] },
-        ],
+        sentences: [{ id: 's1', text: '测试内容', chars: [] }],
         source: 'builtin',
         createdAt: Date.now(),
       }

@@ -1,7 +1,13 @@
 import { create } from 'zustand'
 import { persist, createJSONStorage } from 'zustand/middleware'
 import { v4 as uuidv4 } from 'uuid'
-import type { Article, CreateArticleInput, ArticleSource, Sentence, CharInfo } from '@/types/article'
+import type {
+  Article,
+  CreateArticleInput,
+  ArticleSource,
+  Sentence,
+  CharInfo,
+} from '@/types/article'
 import { splitIntoSentences } from '@/utils/sentenceSplit'
 import { pinyin } from 'pinyin-pro'
 import { POEMS_DATA } from '@/assets/texts/Poems'
@@ -12,7 +18,7 @@ import { CharType } from '@/core'
  * 将文本转换为字符信息数组
  */
 function textToChars(text: string): CharInfo[] {
-  return Array.from(text).map(char => {
+  return Array.from(text).map((char) => {
     // 检查是否为汉字
     const isHanzi = /[\u4e00-\u9fa5]/.test(char)
     if (isHanzi) {
@@ -78,58 +84,63 @@ export const useArticleStore = create<ArticleState>()(
       articles: [],
       currentArticleId: null,
 
-      addArticle: (input) => set((state) => {
-        // 检查是否已存在相同 key 的文章
-        if (state.articles.some(a => a.key === input.key)) {
-          return state
-        }
-        const article = createArticle(input)
-        return {
-          articles: [...state.articles, article],
-        }
-      }),
+      addArticle: (input) =>
+        set((state) => {
+          // 检查是否已存在相同 key 的文章
+          if (state.articles.some((a) => a.key === input.key)) {
+            return state
+          }
+          const article = createArticle(input)
+          return {
+            articles: [...state.articles, article],
+          }
+        }),
 
-      removeArticle: (id) => set((state) => ({
-        articles: state.articles.filter(a => a.id !== id),
-        // 如果删除的是当前选中的文章，清除选中状态
-        currentArticleId: state.currentArticleId === id ? null : state.currentArticleId,
-      })),
+      removeArticle: (id) =>
+        set((state) => ({
+          articles: state.articles.filter((a) => a.id !== id),
+          // 如果删除的是当前选中的文章，清除选中状态
+          currentArticleId:
+            state.currentArticleId === id ? null : state.currentArticleId,
+        })),
 
       selectArticle: (id) => set({ currentArticleId: id }),
 
-      getArticleById: (id) => get().articles.find(a => a.id === id),
+      getArticleById: (id) => get().articles.find((a) => a.id === id),
 
-      getArticlesBySource: (source) => get().articles.filter(a => a.source === source),
+      getArticlesBySource: (source) =>
+        get().articles.filter((a) => a.source === source),
 
-      initBuiltinArticles: () => set((state) => {
-        // 获取已存在的内置文章 keys
-        const existingKeys = new Set(state.articles.map(a => a.key))
+      initBuiltinArticles: () =>
+        set((state) => {
+          // 获取已存在的内置文章 keys
+          const existingKeys = new Set(state.articles.map((a) => a.key))
 
-        // 添加诗词数据
-        const poemsToAdd = POEMS_DATA
-          .filter(p => !existingKeys.has(p.key))
-          .map(p => createArticle(p))
+          // 添加诗词数据
+          const poemsToAdd = POEMS_DATA.filter(
+            (p) => !existingKeys.has(p.key),
+          ).map((p) => createArticle(p))
 
-        // 添加名言数据
-        const quotesToAdd = QUOTES_DATA
-          .filter(q => !existingKeys.has(q.key))
-          .map(q => createArticle(q))
+          // 添加名言数据
+          const quotesToAdd = QUOTES_DATA.filter(
+            (q) => !existingKeys.has(q.key),
+          ).map((q) => createArticle(q))
 
-        return {
-          articles: [...state.articles, ...poemsToAdd, ...quotesToAdd],
-        }
-      }),
+          return {
+            articles: [...state.articles, ...poemsToAdd, ...quotesToAdd],
+          }
+        }),
     }),
     {
       name: 'article-storage',
       storage: createJSONStorage(() => localStorage),
       // 仅持久化上传的文章和当前选中状态
       partialize: (state) => ({
-        articles: state.articles.filter(a => a.source === 'upload'),
+        articles: state.articles.filter((a) => a.source === 'upload'),
         currentArticleId: state.currentArticleId,
       }),
-    }
-  )
+    },
+  ),
 )
 
 // 初始化内置文章

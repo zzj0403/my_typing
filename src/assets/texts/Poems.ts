@@ -154,7 +154,8 @@ export const POEMS_DATA: Omit<Article, 'sentences' | 'createdAt'>[] = [
     key: 'poem-youzishu',
     title: '游子吟',
     description: '唐·孟郊',
-    content: '慈母手中线，游子身上衣。临行密密缝，意恐迟迟归。谁言寸草心，报得三春晖。',
+    content:
+      '慈母手中线，游子身上衣。临行密密缝，意恐迟迟归。谁言寸草心，报得三春晖。',
     source: 'builtin',
   },
   {

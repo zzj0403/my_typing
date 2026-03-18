@@ -47,12 +47,14 @@ metrics:
 **Files:** `src/assets/texts/Quotes.ts`, `tests/assets/quotes.test.ts`
 
 **Implementation:**
+
 - Created `QUOTES_DATA` array with 32 classic Chinese quotes
 - Sources include: I Ching, Analects, Mencius, Tao Te Ching, etc.
 - Each quote has: id, key, title, description, content, source
 - All quotes have `source: 'builtin'`
 
 **Tests (6 passing):**
+
 - Array validation (length >= 30)
 - Required field validation
 - Source type validation
@@ -67,12 +69,14 @@ metrics:
 **Files:** `src/utils/fileParser.ts`, `tests/utils/fileParser.test.ts`
 
 **Implementation:**
+
 - `parseTxtFile(file: File): Promise<string>` - Main parsing function
 - `isValidTxtFile(file: File): boolean` - File validation helper
 - `FileParseError` class for error handling
 - Uses `FileReader.readAsText(file, 'UTF-8')` for Chinese support
 
 **Tests (7 passing):**
+
 - UTF-8 encoded txt file parsing
 - Chinese character handling
 - Non-txt file rejection
@@ -87,6 +91,7 @@ metrics:
 **Files:** `src/assets/texts/index.ts`
 
 **Implementation:**
+
 - Added `export { QUOTES_DATA } from './Quotes'`
 - Preserved existing imports and exports
 
@@ -98,13 +103,13 @@ None - plan executed exactly as written.
 
 ## Files Created/Modified
 
-| File | Action | Lines | Description |
-|------|--------|-------|-------------|
-| src/assets/texts/Quotes.ts | Created | 150+ | 32 classic quotes data |
-| src/utils/fileParser.ts | Created | 55 | File parser with UTF-8 |
-| tests/assets/quotes.test.ts | Created | 50 | Quote validation tests |
-| tests/utils/fileParser.test.ts | Modified | 50 | Parser tests |
-| src/assets/texts/index.ts | Modified | 7 | Added QUOTES_DATA export |
+| File                           | Action   | Lines | Description              |
+| ------------------------------ | -------- | ----- | ------------------------ |
+| src/assets/texts/Quotes.ts     | Created  | 150+  | 32 classic quotes data   |
+| src/utils/fileParser.ts        | Created  | 55    | File parser with UTF-8   |
+| tests/assets/quotes.test.ts    | Created  | 50    | Quote validation tests   |
+| tests/utils/fileParser.test.ts | Modified | 50    | Parser tests             |
+| src/assets/texts/index.ts      | Modified | 7     | Added QUOTES_DATA export |
 
 ## Verification Results
 

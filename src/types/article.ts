@@ -24,13 +24,13 @@ export interface Sentence {
  */
 export interface Article {
   id: string
-  key: string              // 兼容现有 TextConfig.key
+  key: string // 兼容现有 TextConfig.key
   title: string
   description?: string
-  content: string          // 原始文本
-  sentences: Sentence[]    // 分句后的数据
+  content: string // 原始文本
+  sentences: Sentence[] // 分句后的数据
   source: ArticleSource
-  createdAt: number        // 时间戳
+  createdAt: number // 时间戳
 }
 
 /**

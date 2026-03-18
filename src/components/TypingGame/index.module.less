@@ -15,39 +15,30 @@
 }
 
 .header {
-  margin-bottom: 16px;
+  text-align: center;
+  margin-bottom: 24px;
 }
 
 .title {
-  margin-bottom: 12px;
+  margin: 0 0 8px 0;
 }
 
-.progressWrapper {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.progressBar {
-  flex: 1;
-}
-
-.progressText {
+.author {
   font-size: 14px;
   color: #8c8c8c;
-  white-space: nowrap;
 }
 
 .articleArea {
   flex: 1;
   overflow-y: auto;
+  display: flex;
+  justify-content: center;
 }
 
 .articleDisplay {
   padding: 20px;
   background: #ffffff;
   border-radius: 8px;
-  line-height: 2.2;
 }
 
 .sentence {
@@ -61,11 +52,31 @@
   }
 }
 
+.progressWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
+  padding: 0 24px;
+}
+
+.progressBar {
+  flex: 1;
+}
+
+.progressText {
+  font-size: 14px;
+  color: #8c8c8c;
+  white-space: nowrap;
+  min-width: 50px;
+  text-align: right;
+}
+
 .actionButtons {
   display: flex;
   justify-content: center;
   gap: 12px;
-  margin-top: 16px;
+  margin-top: 12px;
 }
 
 .completeArea {

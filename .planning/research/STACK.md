@@ -1,15 +1,13 @@
 # Technology Stack
 
-**Project:** 个人中文打字练习工具
-**Researched:** 2026-03-17
-**Reference:** https://github.com/yunsii/pinyin
+**Project:** 个人中文打字练习工具 **Researched:** 2026-03-17 **Reference:** https://github.com/yunsii/pinyin
 
 ## Recommended Stack
 
 ### Core Framework
 
 | Technology | Version | Purpose | Why |
-|------------|---------|---------|-----|
+| --- | --- | --- | --- |
 | **Vite** | ^6.x | 构建工具 | 极速 HMR、原生 ESM 支持、零配置开箱即用、生态成熟 |
 | **TypeScript** | ^5.x | 类型系统 | 类型安全、IDE 支持完善、代码可维护性高 |
 | **React** | ^18.x | UI 框架 | 参考项目使用、组件化开发、生态丰富 |
@@ -18,7 +16,7 @@
 ### UI Libraries
 
 | Technology | Version | Purpose | Why |
-|------------|---------|---------|-----|
+| --- | --- | --- | --- |
 | **Ant Design** | ^5.x | UI 组件库 | 企业级组件、中文友好、文档完善、参考项目使用 |
 | **@ant-design/icons** | ^5.x | 图标库 | 与 Ant Design 配套、图标丰富 |
 | **Less** | ^4.x | CSS 预处理器 | Ant Design 默认使用、支持变量和 mixin |
@@ -26,44 +24,44 @@
 ### 中文拼音处理
 
 | Technology | Version | Purpose | Why |
-|------------|---------|---------|-----|
+| --- | --- | --- | --- |
 | **pinyin-pro** | ^3.x | 拼音转换 | TypeScript 原生支持、多音字识别准确、功能全面（声母/韵母/音调/首字母）、GitHub 2.7K+ stars、活跃维护 |
 | **pinyin-data** | - | 拼音数据源（可选） | 基于 cc-cedict 的完整拼音数据集、Unicode 17.0.0 兼容 |
 
 ### State & Hooks
 
 | Technology | Version | Purpose | Why |
-|------------|---------|---------|-----|
+| --- | --- | --- | --- |
 | **ahooks** | ^3.x | React Hooks 库 | 阿里出品、Hook 丰富、参考项目使用、中文文档完善 |
 
 ### Utilities
 
-| Technology | Version | Purpose | Why |
-|------------|---------|---------|-----|
-| **lodash-es** | ^4.x | 工具函数 | ES Module 版本、Tree-shaking 友好 |
-| **classnames** | ^2.x | CSS 类名拼接 | 简化条件类名逻辑 |
+| Technology     | Version | Purpose      | Why                               |
+| -------------- | ------- | ------------ | --------------------------------- |
+| **lodash-es**  | ^4.x    | 工具函数     | ES Module 版本、Tree-shaking 友好 |
+| **classnames** | ^2.x    | CSS 类名拼接 | 简化条件类名逻辑                  |
 
 ### Development Tools
 
-| Technology | Version | Purpose | Why |
-|------------|---------|---------|-----|
-| **ESLint** | ^9.x | 代码检查 | 标准化代码风格、捕获常见错误 |
-| **Prettier** | ^3.x | 代码格式化 | 统一格式化风格 |
-| **Husky** | ^9.x | Git Hooks | 提交前自动检查 |
-| **lint-staged** | ^15.x | 暂存文件检查 | 只检查变更文件、提升效率 |
-| **cross-env** | ^7.x | 跨平台环境变量 | Windows/macOS/Linux 兼容 |
+| Technology      | Version | Purpose        | Why                          |
+| --------------- | ------- | -------------- | ---------------------------- |
+| **ESLint**      | ^9.x    | 代码检查       | 标准化代码风格、捕获常见错误 |
+| **Prettier**    | ^3.x    | 代码格式化     | 统一格式化风格               |
+| **Husky**       | ^9.x    | Git Hooks      | 提交前自动检查               |
+| **lint-staged** | ^15.x   | 暂存文件检查   | 只检查变更文件、提升效率     |
+| **cross-env**   | ^7.x    | 跨平台环境变量 | Windows/macOS/Linux 兼容     |
 
 ### Vite Plugins
 
 | Technology | Version | Purpose | Why |
-|------------|---------|---------|-----|
+| --- | --- | --- | --- |
 | **@vitejs/plugin-react** | ^4.x | React 支持 | 官方 React 插件、Fast Refresh |
 | **vite-tsconfig-paths** | ^5.x | 路径别名 | 支持 tsconfig paths 配置 |
 
 ## Alternatives Considered
 
 | Category | Recommended | Alternative | Why Not |
-|----------|-------------|-------------|---------|
+| --- | --- | --- | --- |
 | UI 框架 | React | Vue 3 | 参考项目使用 React，保持一致性 |
 | UI 库 | Ant Design | Element Plus / Arco Design | Element Plus 是 Vue 生态，Arco Design 生态较小 |
 | 拼音库 | pinyin-pro | pinyin (hokaccha) | pinyin-pro 功能更全、TypeScript 支持更好、多音字处理更准确 |
@@ -81,49 +79,49 @@ const handleFileUpload = (file: File): Promise<string> => {
   return new Promise((resolve, reject) => {
     // 1. 文件类型验证
     if (!file.name.endsWith('.txt')) {
-      reject(new Error('仅支持 .txt 文件'));
-      return;
+      reject(new Error('仅支持 .txt 文件'))
+      return
     }
 
     // 2. 文件大小限制 (建议 1MB 以内)
-    const MAX_SIZE = 1024 * 1024;
+    const MAX_SIZE = 1024 * 1024
     if (file.size > MAX_SIZE) {
-      reject(new Error('文件大小不能超过 1MB'));
-      return;
+      reject(new Error('文件大小不能超过 1MB'))
+      return
     }
 
     // 3. 使用 FileReader 异步读取
-    const reader = new FileReader();
+    const reader = new FileReader()
 
     reader.onload = (e) => {
       try {
-        const arrayBuffer = e.target?.result as ArrayBuffer;
+        const arrayBuffer = e.target?.result as ArrayBuffer
         // 4. 使用 TextDecoder 正确处理中文编码
-        const decoder = new TextDecoder('utf-8');
-        const text = decoder.decode(arrayBuffer);
-        resolve(text);
+        const decoder = new TextDecoder('utf-8')
+        const text = decoder.decode(arrayBuffer)
+        resolve(text)
       } catch (error) {
-        reject(error);
+        reject(error)
       }
-    };
+    }
 
-    reader.onerror = () => reject(reader.error);
+    reader.onerror = () => reject(reader.error)
 
     // 5. 以 ArrayBuffer 形式读取
-    reader.readAsArrayBuffer(file);
-  });
-};
+    reader.readAsArrayBuffer(file)
+  })
+}
 ```
 
 ### 最佳实践
 
-| 实践 | 说明 |
-|------|------|
-| 异步处理 | FileReader 异步读取，不阻塞 UI |
-| 类型验证 | 检查文件扩展名和 MIME 类型 |
-| 大小限制 | 限制文件大小防止内存溢出 |
+| 实践     | 说明                                 |
+| -------- | ------------------------------------ |
+| 异步处理 | FileReader 异步读取，不阻塞 UI       |
+| 类型验证 | 检查文件扩展名和 MIME 类型           |
+| 大小限制 | 限制文件大小防止内存溢出             |
 | 编码处理 | 使用 TextDecoder 正确处理 UTF-8 中文 |
-| 错误处理 | 完善的 try-catch 和错误提示 |
+| 错误处理 | 完善的 try-catch 和错误提示          |
 
 ## Real-Time Input Feedback Implementation
 
@@ -199,13 +197,13 @@ const TypingPractice: React.FC = () => {
 
 ### 实时反馈最佳实践
 
-| 实践 | 说明 |
-|------|------|
-| Input Event | 使用 onChange 事件实时捕获输入 |
-| 即时验证 | 每次输入立即检测是否匹配 |
-| 视觉反馈 | 通过颜色变化提供即时反馈（绿色=正确，红色=错误） |
-| 防抖处理 | 统计计算可适当防抖，避免频繁更新 |
-| 焦点管理 | 始终保持输入框焦点，提升体验 |
+| 实践        | 说明                                             |
+| ----------- | ------------------------------------------------ |
+| Input Event | 使用 onChange 事件实时捕获输入                   |
+| 即时验证    | 每次输入立即检测是否匹配                         |
+| 视觉反馈    | 通过颜色变化提供即时反馈（绿色=正确，红色=错误） |
+| 防抖处理    | 统计计算可适当防抖，避免频繁更新                 |
+| 焦点管理    | 始终保持输入框焦点，提升体验                     |
 
 ## Installation
 

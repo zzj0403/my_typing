@@ -78,7 +78,12 @@ describe('useArticleStore', () => {
   describe('getArticleById', () => {
     it('should return article by id', () => {
       const { addArticle, getArticleById } = useArticleStore.getState()
-      addArticle({ key: 'test', title: 'Test', content: 'Test', source: 'upload' })
+      addArticle({
+        key: 'test',
+        title: 'Test',
+        content: 'Test',
+        source: 'upload',
+      })
       const articleId = useArticleStore.getState().articles[0].id
       const article = getArticleById(articleId)
       expect(article).toBeDefined()
@@ -110,7 +115,9 @@ describe('useArticleStore', () => {
       const { initBuiltinArticles, articles } = useArticleStore.getState()
       initBuiltinArticles()
       const updatedArticles = useArticleStore.getState().articles
-      const builtinArticles = updatedArticles.filter(a => a.source === 'builtin')
+      const builtinArticles = updatedArticles.filter(
+        (a) => a.source === 'builtin',
+      )
       expect(builtinArticles.length).toBeGreaterThan(0)
     })
   })
