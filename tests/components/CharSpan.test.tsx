@@ -15,27 +15,28 @@ describe('CharSpan', () => {
   it('should render pending character with correct class (UI-02)', () => {
     render(<CharSpan char={baseChar} state={CharState.Pending} isCurrent={false} />)
     const span = screen.getByText('你')
-    expect(span).not.toHaveClass('current')
-    expect(span).not.toHaveClass('correct')
-    expect(span).not.toHaveClass('incorrect')
+    // CSS modules generate hashed class names, check for presence of expected class pattern
+    expect(span.className).not.toMatch(/current/)
+    expect(span.className).not.toMatch(/correct/)
+    expect(span.className).not.toMatch(/incorrect/)
   })
 
   it('should render current character with underline class (UI-02)', () => {
     render(<CharSpan char={baseChar} state={CharState.Pending} isCurrent={true} />)
     const span = screen.getByText('你')
-    expect(span).toHaveClass('current')
+    expect(span.className).toMatch(/current/)
   })
 
   it('should render correct character with green class (UI-03)', () => {
     render(<CharSpan char={baseChar} state={CharState.Correct} isCurrent={false} />)
     const span = screen.getByText('你')
-    expect(span).toHaveClass('correct')
+    expect(span.className).toMatch(/correct/)
   })
 
   it('should render incorrect character with red and strikethrough (UI-04)', () => {
     render(<CharSpan char={baseChar} state={CharState.Incorrect} isCurrent={false} inputPinyin="ta" />)
     const span = screen.getByText('你')
-    expect(span).toHaveClass('incorrect')
+    expect(span.className).toMatch(/incorrect/)
     expect(screen.getByText('ta')).toBeInTheDocument() // shows error pinyin
   })
 })
