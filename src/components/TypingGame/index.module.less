@@ -9,9 +9,14 @@
 .hiddenInput {
   position: absolute;
   opacity: 0;
-  pointer-events: none;
-  width: 0;
-  height: 0;
+  width: 1px;
+  height: 1px;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
 .header {
@@ -93,6 +98,11 @@
 .completeText {
   margin-bottom: 16px;
   color: #52c41a;
+}
+
+.completeButtons {
+  display: flex;
+  gap: 12px;
 }
 
 .emptyState {

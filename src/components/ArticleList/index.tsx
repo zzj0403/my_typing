@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useMemo } from 'react'
-import { List, Button, Upload, Tabs, Modal, Empty, message, Spin } from 'antd'
+import { Button, Upload, Tabs, Modal, Empty, message, Spin } from 'antd'
 import {
   DeleteOutlined,
   FileTextOutlined,
@@ -11,9 +11,8 @@ import {
   isValidTxtFile,
   FileParseError,
 } from '@/utils/fileParser'
-import type { Article, CreateArticleInput } from '@/types/article'
+import type { ArticleMeta, CreateArticleInput } from '@/types/article'
 import type { ArticleListProps, ArticleCategory } from './types'
-import { CATEGORY_SOURCE_MAP } from './types'
 import styles from './index.module.less'
 
 const { TabPane } = Tabs
@@ -24,7 +23,7 @@ const MAX_FILE_SIZE = 100 * 1024
 
 /**
  * 文章列表组件
- * 展示所有文章，支持分类筛选、选择、上传和删除
+ * 展示所有文章元数据，支持分类筛选、选择、上传和删除
  */
 const ArticleList: React.FC<ArticleListProps> = ({
   showUpload = true,
@@ -38,37 +37,41 @@ const ArticleList: React.FC<ArticleListProps> = ({
   const [uploading, setUploading] = useState(false)
 
   const {
-    articles,
     currentArticleId,
     addArticle,
     removeArticle,
     selectArticle,
+    getArticleMetas,
   } = useArticleStore()
 
+  // 获取所有文章元数据
+  const articleMetas = getArticleMetas()
+
   // 根据分类过滤文章
-  const filteredArticles = useMemo(() => {
-    const source = CATEGORY_SOURCE_MAP[activeCategory]
-    if (!source) {
-      return articles
+  const filteredMetas = useMemo(() => {
+    if (activeCategory === 'all') {
+      return articleMetas
     }
     if (activeCategory === 'poems') {
-      return articles.filter(
-        (a) => a.source === 'builtin' && a.id.startsWith('poem-'),
-      )
+      return articleMetas.filter((m) => m.id.startsWith('poem-'))
     }
     if (activeCategory === 'quotes') {
-      return articles.filter(
-        (a) => a.source === 'builtin' && a.id.startsWith('quote-'),
-      )
+      return articleMetas.filter((m) => m.id.startsWith('quote-'))
     }
-    return articles.filter((a) => a.source === source)
-  }, [articles, activeCategory])
+    if (activeCategory === 'uploads') {
+      return articleMetas.filter((m) => m.source === 'upload')
+    }
+    return articleMetas
+  }, [articleMetas, activeCategory])
 
   // 处理文章选择
   const handleSelect = useCallback(
-    (article: Article) => {
-      selectArticle(article.id)
-      onSelect?.(article.id)
+    (meta: ArticleMeta) => {
+      if (onSelect) {
+        onSelect(meta.id)
+        return
+      }
+      selectArticle(meta.id)
     },
     [selectArticle, onSelect],
   )
@@ -118,16 +121,16 @@ const ArticleList: React.FC<ArticleListProps> = ({
 
   // 处理文章删除
   const handleDelete = useCallback(
-    (article: Article, e: React.MouseEvent) => {
+    (meta: ArticleMeta, e: React.MouseEvent) => {
       e.stopPropagation()
       confirm({
         title: '删除文章',
-        content: `确认删除「${article.title}」吗？此操作不可恢复`,
+        content: `确认删除「${meta.title}」吗？此操作不可恢复`,
         okText: '删除',
         okType: 'danger',
         cancelText: '取消',
         onOk: () => {
-          removeArticle(article.id)
+          removeArticle(meta.id)
           message.success('文章已删除')
         },
       })
@@ -136,22 +139,22 @@ const ArticleList: React.FC<ArticleListProps> = ({
   )
 
   // 渲染文章项
-  const renderArticleItem = (article: Article) => {
-    const isActive = article.id === currentArticleId
-    const canDelete = article.source === 'upload'
+  const renderArticleItem = (meta: ArticleMeta) => {
+    const isActive = meta.id === currentArticleId
+    const canDelete = meta.source === 'upload'
 
     return (
       <div
-        key={article.id}
+        key={meta.id}
         className={`${styles.articleItem} ${isActive ? styles.articleItemActive : ''}`}
-        onClick={() => handleSelect(article)}
+        onClick={() => handleSelect(meta)}
       >
         <FileTextOutlined className={styles.articleIcon} />
         <div className={styles.articleContent}>
-          <div className={styles.articleTitle}>{article.title}</div>
-          {article.description && (
+          <div className={styles.articleTitle}>{meta.title}</div>
+          {meta.description && (
             <div className={styles.articleDescription}>
-              {article.description}
+              {meta.description}
             </div>
           )}
         </div>
@@ -160,7 +163,7 @@ const ArticleList: React.FC<ArticleListProps> = ({
             type='text'
             icon={<DeleteOutlined />}
             className={styles.deleteButton}
-            onClick={(e) => handleDelete(article, e)}
+            onClick={(e) => handleDelete(meta, e)}
             aria-label='删除文章'
           />
         )}
@@ -230,10 +233,8 @@ const ArticleList: React.FC<ArticleListProps> = ({
         <div className={styles.loading}>
           <Spin tip='上传中...' />
         </div>
-      ) : filteredArticles.length > 0 ? (
-        <div>
-          {filteredArticles.map((article) => renderArticleItem(article))}
-        </div>
+      ) : filteredMetas.length > 0 ? (
+        <div>{filteredMetas.map((meta) => renderArticleItem(meta))}</div>
       ) : (
         renderEmpty()
       )}

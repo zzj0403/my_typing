@@ -25,10 +25,13 @@ const PUNCTUATION_MAP: Record<string, string> = {
 }
 
 export function TypingGame() {
-  const { currentArticleId, getArticleById } = useArticleStore()
-  const article = currentArticleId
-    ? (getArticleById(currentArticleId) ?? null)
-    : null
+  const {
+    currentArticleId,
+    getArticleById,
+    ensureArticleLoaded,
+    selectNextArticle,
+  } = useArticleStore()
+  const article = currentArticleId ? getArticleById(currentArticleId) : null
 
   const { chars, currentIndex, progress, isComplete, handleInput, reset } =
     useTypingGame(article)
@@ -44,10 +47,28 @@ export function TypingGame() {
     }
   }, [isComplete])
 
-  // Auto focus
   useEffect(() => {
-    inputRef.current?.focus()
-  }, [article?.id, currentIndex])
+    if (currentArticleId) {
+      ensureArticleLoaded(currentArticleId)
+    }
+  }, [currentArticleId, ensureArticleLoaded])
+
+  // Auto focus on mount and when article changes
+  useEffect(() => {
+    // 使用 setTimeout 确保 DOM 渲染完成后再聚焦
+    const timer = setTimeout(() => {
+      inputRef.current?.focus()
+    }, 0)
+    return () => clearTimeout(timer)
+  }, [article?.id])
+
+  // Keep focus on input - auto refocus when losing focus
+  const handleBlur = useCallback(() => {
+    // 延迟重新聚焦，避免与其他事件冲突
+    setTimeout(() => {
+      inputRef.current?.focus()
+    }, 10)
+  }, [])
 
   // Check if input matches expected pinyin
   const checkAndSubmit = useCallback(
@@ -92,7 +113,8 @@ export function TypingGame() {
   const handleCompositionEnd = useCallback(
     (e: React.CompositionEvent<HTMLInputElement>) => {
       setIsComposing(false)
-      const value = e.currentTarget.value
+      // 使用 e.data 而非 e.currentTarget.value，因为某些浏览器在 compositionend 时 value 还未更新
+      const value = e.data ?? e.currentTarget.value
 
       // Check if current char is punctuation and value matches
       const currentChar = chars[currentIndex]
@@ -192,6 +214,12 @@ export function TypingGame() {
     setTimeout(() => inputRef.current?.focus(), 0)
   }, [reset])
 
+  const handleNextArticle = useCallback(() => {
+    selectNextArticle()
+    setInputPinyin('')
+    setTimeout(() => inputRef.current?.focus(), 0)
+  }, [selectNextArticle])
+
   // Keep input focused when clicking container
   const handleContainerClick = useCallback(() => {
     inputRef.current?.focus()
@@ -219,6 +247,7 @@ export function TypingGame() {
         onCompositionStart={handleCompositionStart}
         onCompositionEnd={handleCompositionEnd}
         onKeyDown={handleKeyDown}
+        onBlur={handleBlur}
         autoFocus
         autoComplete='off'
         autoCapitalize='off'
@@ -274,9 +303,12 @@ export function TypingGame() {
           <Typography.Title level={4} className={styles.completeText}>
             🎉 恭喜完成！
           </Typography.Title>
-          <Button type='primary' onClick={handleReset}>
-            再来一次
-          </Button>
+          <div className={styles.completeButtons}>
+            <Button onClick={handleReset}>再来一次</Button>
+            <Button type='primary' onClick={handleNextArticle}>
+              下一篇文章
+            </Button>
+          </div>
         </div>
       )}
     </div>

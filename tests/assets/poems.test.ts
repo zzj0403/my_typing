@@ -7,25 +7,20 @@ describe('Poems data', () => {
     expect(POEMS_DATA.length).toBeGreaterThanOrEqual(20)
   })
 
-  it('should have required fields: id, key, title, content', () => {
+  it('should have required fields: id, key, title, getContent', () => {
     POEMS_DATA.forEach((poem) => {
       expect(poem).toHaveProperty('id')
       expect(poem).toHaveProperty('key')
       expect(poem).toHaveProperty('title')
-      expect(poem).toHaveProperty('content')
-      expect(poem).toHaveProperty('source')
+      expect(poem).toHaveProperty('getContent')
+      expect(typeof poem.getContent).toBe('function')
     })
   })
 
-  it('should have source as builtin', () => {
+  it('should have non-empty content from getContent()', () => {
     POEMS_DATA.forEach((poem) => {
-      expect(poem.source).toBe('builtin')
-    })
-  })
-
-  it('should have non-empty content', () => {
-    POEMS_DATA.forEach((poem) => {
-      expect(poem.content.length).toBeGreaterThan(0)
+      const content = poem.getContent()
+      expect(content.length).toBeGreaterThan(0)
     })
   })
 

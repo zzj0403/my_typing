@@ -34,6 +34,28 @@ export interface Article {
 }
 
 /**
+ * 文章元数据（轻量级，用于列表展示）
+ */
+export interface ArticleMeta {
+  id: string
+  key: string
+  title: string
+  description?: string
+  source: ArticleSource
+}
+
+/**
+ * 内置文章定义（用于注册表）
+ */
+export interface BuiltinArticleDef {
+  id: string
+  key: string
+  title: string
+  description?: string
+  getContent: () => string // 懒加载内容
+}
+
+/**
  * 创建文章的输入参数（不含自动生成的字段）
  */
 export interface CreateArticleInput {

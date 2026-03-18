@@ -31,6 +31,8 @@ const mockArticle = {
 }
 
 describe('TypingGame', () => {
+  const mockEnsureArticleLoaded = vi.fn()
+
   beforeEach(() => {
     vi.clearAllMocks()
   })
@@ -39,6 +41,8 @@ describe('TypingGame', () => {
     ;(useArticleStore as any).mockReturnValue({
       currentArticleId: 'test-1',
       getArticleById: () => mockArticle,
+      ensureArticleLoaded: mockEnsureArticleLoaded,
+      selectNextArticle: vi.fn(),
     })
 
     render(<TypingGame />)
@@ -54,6 +58,8 @@ describe('TypingGame', () => {
     ;(useArticleStore as any).mockReturnValue({
       currentArticleId: 'test-1',
       getArticleById: () => mockArticle,
+      ensureArticleLoaded: mockEnsureArticleLoaded,
+      selectNextArticle: vi.fn(),
     })
 
     render(<TypingGame />)
@@ -67,6 +73,8 @@ describe('TypingGame', () => {
     ;(useArticleStore as any).mockReturnValue({
       currentArticleId: null,
       getArticleById: () => null,
+      ensureArticleLoaded: mockEnsureArticleLoaded,
+      selectNextArticle: vi.fn(),
     })
 
     render(<TypingGame />)

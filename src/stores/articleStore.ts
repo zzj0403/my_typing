@@ -3,16 +3,32 @@ import { persist, createJSONStorage } from 'zustand/middleware'
 import { v4 as uuidv4 } from 'uuid'
 import type {
   Article,
+  ArticleMeta,
   CreateArticleInput,
   ArticleSource,
   Sentence,
   CharInfo,
+  BuiltinArticleDef,
 } from '@/types/article'
 import { splitIntoSentences } from '@/utils/sentenceSplit'
 import { pinyin } from 'pinyin-pro'
 import { POEMS_DATA } from '@/assets/texts/Poems'
 import { QUOTES_DATA } from '@/assets/texts/Quotes'
 import { CharType } from '@/core'
+
+// 内置文章注册表
+const BUILTIN_REGISTRY: Map<string, BuiltinArticleDef> = new Map()
+
+/**
+ * 初始化内置文章注册表
+ */
+function initBuiltinRegistry() {
+  POEMS_DATA.forEach((def) => BUILTIN_REGISTRY.set(def.id, def))
+  QUOTES_DATA.forEach((def) => BUILTIN_REGISTRY.set(def.id, def))
+}
+
+// 立即初始化注册表
+initBuiltinRegistry()
 
 /**
  * 将文本转换为字符信息数组
@@ -50,6 +66,39 @@ function contentToSentences(content: string): Sentence[] {
 }
 
 /**
+ * 从注册表获取内置文章元数据列表
+ */
+function getBuiltinMetas(): ArticleMeta[] {
+  return Array.from(BUILTIN_REGISTRY.values()).map((def) => ({
+    id: def.id,
+    key: def.key,
+    title: def.title,
+    description: def.description,
+    source: 'builtin' as ArticleSource,
+  }))
+}
+
+/**
+ * 加载内置文章完整内容
+ */
+function loadBuiltinArticle(id: string): Article | null {
+  const def = BUILTIN_REGISTRY.get(id)
+  if (!def) return null
+
+  const content = def.getContent()
+  return {
+    id: def.id,
+    key: def.key,
+    title: def.title,
+    description: def.description,
+    content,
+    sentences: contentToSentences(content),
+    source: 'builtin',
+    createdAt: Date.now(),
+  }
+}
+
+/**
  * 将 CreateArticleInput 转换为完整的 Article
  */
 function createArticle(input: CreateArticleInput): Article {
@@ -66,85 +115,137 @@ function createArticle(input: CreateArticleInput): Article {
 }
 
 export interface ArticleState {
-  articles: Article[]
+  // 用户上传的文章（完整内容，需要持久化）
+  uploadedArticles: Article[]
+  // 当前选中的文章 ID
   currentArticleId: string | null
+  // 已加载的完整文章缓存（内置文章）
+  loadedArticles: Map<string, Article>
 
   // Actions
   addArticle: (input: CreateArticleInput) => void
   removeArticle: (id: string) => void
   selectArticle: (id: string | null) => void
-  getArticleById: (id: string) => Article | undefined
-  getArticlesBySource: (source: ArticleSource) => Article[]
-  initBuiltinArticles: () => void
+  selectNextArticle: () => void
+  ensureArticleLoaded: (id: string) => void
+  getArticleById: (id: string) => Article | null
+  getArticleMetas: () => ArticleMeta[]
+  getMetasBySource: (source: ArticleSource) => ArticleMeta[]
 }
 
 export const useArticleStore = create<ArticleState>()(
   persist(
     (set, get) => ({
-      articles: [],
+      uploadedArticles: [],
       currentArticleId: null,
+      loadedArticles: new Map(),
 
       addArticle: (input) =>
         set((state) => {
           // 检查是否已存在相同 key 的文章
-          if (state.articles.some((a) => a.key === input.key)) {
+          if (state.uploadedArticles.some((a) => a.key === input.key)) {
             return state
           }
           const article = createArticle(input)
           return {
-            articles: [...state.articles, article],
+            uploadedArticles: [...state.uploadedArticles, article],
           }
         }),
 
       removeArticle: (id) =>
         set((state) => ({
-          articles: state.articles.filter((a) => a.id !== id),
-          // 如果删除的是当前选中的文章，清除选中状态
+          uploadedArticles: state.uploadedArticles.filter((a) => a.id !== id),
           currentArticleId:
             state.currentArticleId === id ? null : state.currentArticleId,
         })),
 
-      selectArticle: (id) => set({ currentArticleId: id }),
+      ensureArticleLoaded: (id) => {
+        const state = get()
+        if (state.loadedArticles.has(id)) return
+        const article = loadBuiltinArticle(id)
+        if (!article) return
 
-      getArticleById: (id) => get().articles.find((a) => a.id === id),
-
-      getArticlesBySource: (source) =>
-        get().articles.filter((a) => a.source === source),
-
-      initBuiltinArticles: () =>
-        set((state) => {
-          // 获取已存在的内置文章 keys
-          const existingKeys = new Set(state.articles.map((a) => a.key))
-
-          // 添加诗词数据
-          const poemsToAdd = POEMS_DATA.filter(
-            (p) => !existingKeys.has(p.key),
-          ).map((p) => createArticle(p))
-
-          // 添加名言数据
-          const quotesToAdd = QUOTES_DATA.filter(
-            (q) => !existingKeys.has(q.key),
-          ).map((q) => createArticle(q))
-
-          return {
-            articles: [...state.articles, ...poemsToAdd, ...quotesToAdd],
+        set((currentState) => {
+          if (currentState.loadedArticles.has(id)) {
+            return currentState
           }
-        }),
+          const newLoaded = new Map(currentState.loadedArticles)
+          newLoaded.set(id, article)
+          return { loadedArticles: newLoaded }
+        })
+      },
+
+      selectArticle: (id) => {
+        if (!id) {
+          set({ currentArticleId: null })
+          return
+        }
+
+        const state = get()
+
+        // 检查是否是上传的文章
+        const uploaded = state.uploadedArticles.find((a) => a.id === id)
+        if (uploaded) {
+          set({ currentArticleId: id })
+          return
+        }
+
+        get().ensureArticleLoaded(id)
+        if (get().loadedArticles.has(id)) {
+          set({ currentArticleId: id })
+        }
+      },
+
+      selectNextArticle: () => {
+        const metas = get().getArticleMetas()
+        if (metas.length === 0) return
+
+        const { currentArticleId } = get()
+        const currentIndex = metas.findIndex((m) => m.id === currentArticleId)
+        const nextIndex = (currentIndex + 1) % metas.length
+        get().selectArticle(metas[nextIndex].id)
+      },
+
+      getArticleById: (id) => {
+        const state = get()
+
+        // 先检查上传的文章
+        const uploaded = state.uploadedArticles.find((a) => a.id === id)
+        if (uploaded) return uploaded
+
+        // 检查已加载的内置文章
+        const loaded = state.loadedArticles.get(id)
+        if (loaded) return loaded
+
+        return null
+      },
+
+      getArticleMetas: () => {
+        const { uploadedArticles } = get()
+        const builtinMetas = getBuiltinMetas()
+        const uploadedMetas: ArticleMeta[] = uploadedArticles.map((a) => ({
+          id: a.id,
+          key: a.key,
+          title: a.title,
+          description: a.description,
+          source: a.source,
+        }))
+        return [...builtinMetas, ...uploadedMetas]
+      },
+
+      getMetasBySource: (source) => {
+        const metas = get().getArticleMetas()
+        return metas.filter((m) => m.source === source)
+      },
     }),
     {
       name: 'article-storage',
       storage: createJSONStorage(() => localStorage),
       // 仅持久化上传的文章和当前选中状态
       partialize: (state) => ({
-        articles: state.articles.filter((a) => a.source === 'upload'),
+        uploadedArticles: state.uploadedArticles,
         currentArticleId: state.currentArticleId,
       }),
     },
   ),
 )
-
-// 初始化内置文章
-// 在 store 创建后立即调用
-if (typeof window !== 'undefined') {
-  useArticleStore.getState().initBuiltinArticles()
-}

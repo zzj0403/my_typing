@@ -7,25 +7,20 @@ describe('Quotes data', () => {
     expect(QUOTES_DATA.length).toBeGreaterThanOrEqual(30)
   })
 
-  it('should have required fields: id, key, title, content', () => {
+  it('should have required fields: id, key, title, getContent', () => {
     QUOTES_DATA.forEach((quote) => {
       expect(quote).toHaveProperty('id')
       expect(quote).toHaveProperty('key')
       expect(quote).toHaveProperty('title')
-      expect(quote).toHaveProperty('content')
-      expect(quote).toHaveProperty('source')
+      expect(quote).toHaveProperty('getContent')
+      expect(typeof quote.getContent).toBe('function')
     })
   })
 
-  it('should have source as builtin', () => {
+  it('should have non-empty content from getContent()', () => {
     QUOTES_DATA.forEach((quote) => {
-      expect(quote.source).toBe('builtin')
-    })
-  })
-
-  it('should have non-empty content', () => {
-    QUOTES_DATA.forEach((quote) => {
-      expect(quote.content.length).toBeGreaterThan(0)
+      const content = quote.getContent()
+      expect(content.length).toBeGreaterThan(0)
     })
   })
 
