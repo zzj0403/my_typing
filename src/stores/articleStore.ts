@@ -14,6 +14,7 @@ import { splitIntoSentences } from '@/utils/sentenceSplit'
 import { pinyin } from 'pinyin-pro'
 import { POEMS_DATA } from '@/assets/texts/Poems'
 import { QUOTES_DATA } from '@/assets/texts/Quotes'
+import { ESSAYS_DATA } from '@/assets/texts/Essays'
 import { CharType } from '@/core'
 
 // 内置文章注册表
@@ -25,6 +26,7 @@ const BUILTIN_REGISTRY: Map<string, BuiltinArticleDef> = new Map()
 function initBuiltinRegistry() {
   POEMS_DATA.forEach((def) => BUILTIN_REGISTRY.set(def.id, def))
   QUOTES_DATA.forEach((def) => BUILTIN_REGISTRY.set(def.id, def))
+  ESSAYS_DATA.forEach((def) => BUILTIN_REGISTRY.set(def.id, def))
 }
 
 // 立即初始化注册表
@@ -65,17 +67,22 @@ function contentToSentences(content: string): Sentence[] {
   }))
 }
 
+// 缓存的内置文章元数据（只计算一次）
+let cachedBuiltinMetas: ArticleMeta[] | null = null
+
 /**
- * 从注册表获取内置文章元数据列表
+ * 从注册表获取内置文章元数据列表（带缓存）
  */
 function getBuiltinMetas(): ArticleMeta[] {
-  return Array.from(BUILTIN_REGISTRY.values()).map((def) => ({
+  if (cachedBuiltinMetas) return cachedBuiltinMetas
+  cachedBuiltinMetas = Array.from(BUILTIN_REGISTRY.values()).map((def) => ({
     id: def.id,
     key: def.key,
     title: def.title,
     description: def.description,
     source: 'builtin' as ArticleSource,
   }))
+  return cachedBuiltinMetas
 }
 
 /**
@@ -234,8 +241,20 @@ export const useArticleStore = create<ArticleState>()(
       },
 
       getMetasBySource: (source) => {
-        const metas = get().getArticleMetas()
-        return metas.filter((m) => m.source === source)
+        if (source === 'builtin') {
+          return getBuiltinMetas()
+        }
+        if (source === 'upload') {
+          const { uploadedArticles } = get()
+          return uploadedArticles.map((a) => ({
+            id: a.id,
+            key: a.key,
+            title: a.title,
+            description: a.description,
+            source: a.source,
+          }))
+        }
+        return get().getArticleMetas()
       },
     }),
     {

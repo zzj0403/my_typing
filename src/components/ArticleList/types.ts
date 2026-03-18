@@ -3,7 +3,12 @@ import type { ArticleSource } from '@/types/article'
 /**
  * 文章分类
  */
-export type ArticleCategory = 'all' | 'poems' | 'quotes' | 'uploads'
+export type ArticleCategory =
+  | 'all'
+  | 'poems'
+  | 'quotes'
+  | 'essays'
+  | 'uploads'
 
 /**
  * 分类到来源的映射
@@ -15,6 +20,7 @@ export const CATEGORY_SOURCE_MAP: Record<
   all: null,
   poems: 'builtin',
   quotes: 'builtin',
+  essays: 'builtin',
   uploads: 'upload',
 }
 

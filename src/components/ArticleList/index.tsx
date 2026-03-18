@@ -58,6 +58,9 @@ const ArticleList: React.FC<ArticleListProps> = ({
     if (activeCategory === 'quotes') {
       return articleMetas.filter((m) => m.id.startsWith('quote-'))
     }
+    if (activeCategory === 'essays') {
+      return articleMetas.filter((m) => m.id.startsWith('essay-'))
+    }
     if (activeCategory === 'uploads') {
       return articleMetas.filter((m) => m.source === 'upload')
     }
@@ -182,7 +185,7 @@ const ArticleList: React.FC<ArticleListProps> = ({
                 <div className={styles.emptyTitle}>暂无上传文章</div>
                 <div className={styles.emptyDescription}>
                   点击「上传文章」按钮导入 txt
-                  文件，或选择下方内置诗词/名言开始练习
+                  文件，或选择下方内置诗词/名言/短文开始练习
                 </div>
               </>
             }
@@ -224,6 +227,7 @@ const ArticleList: React.FC<ArticleListProps> = ({
           <TabPane tab='全部' key='all' />
           <TabPane tab='诗词' key='poems' />
           <TabPane tab='名言' key='quotes' />
+          <TabPane tab='短文' key='essays' />
           <TabPane tab='我的' key='uploads' />
         </Tabs>
       )}

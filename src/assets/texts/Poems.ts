@@ -199,4 +199,81 @@ export const POEMS_DATA: BuiltinArticleDef[] = [
     getContent: () =>
       '清明时节雨纷纷，路上行人欲断魂。借问酒家何处有，牧童遥指杏花村。',
   },
+  {
+    id: 'poem-chuzhoucao',
+    key: 'poem-chuzhoucao',
+    title: '滁州西涧',
+    description: '唐·韦应物',
+    getContent: () =>
+      '独怜幽草涧边生，上有黄鹂深树鸣。春潮带雨晚来急，野渡无人舟自横。',
+  },
+  {
+    id: 'poem-jiangnanhanchun',
+    key: 'poem-jiangnanhanchun',
+    title: '忆江南',
+    description: '唐·白居易',
+    getContent: () => '江南好，风景旧曾谙。日出江花红胜火，春来江水绿如蓝。',
+  },
+  {
+    id: 'poem-huanghelou',
+    key: 'poem-huanghelou',
+    title: '黄鹤楼',
+    description: '唐·崔颢',
+    getContent: () =>
+      '昔人已乘黄鹤去，此地空余黄鹤楼。黄鹤一去不复返，白云千载空悠悠。',
+  },
+  {
+    id: 'poem-jiangjinjiu',
+    key: 'poem-jiangjinjiu',
+    title: '将进酒',
+    description: '唐·李白',
+    getContent: () =>
+      '君不见黄河之水天上来，奔流到海不复回。君不见高堂明镜悲白发，朝如青丝暮成雪。',
+  },
+  {
+    id: 'poem-chibi',
+    key: 'poem-chibi',
+    title: '赤壁',
+    description: '唐·杜牧',
+    getContent: () =>
+      '折戟沉沙铁未销，自将磨洗认前朝。东风不与周郎便，铜雀春深锁二乔。',
+  },
+  {
+    id: 'poem-zhuliguan',
+    key: 'poem-zhuliguan',
+    title: '竹里馆',
+    description: '唐·王维',
+    getContent: () => '独坐幽篁里，弹琴复长啸。深林人不知，明月来相照。',
+  },
+  {
+    id: 'poem-zengwanglun',
+    key: 'poem-zengwanglun',
+    title: '赠汪伦',
+    description: '唐·李白',
+    getContent: () =>
+      '李白乘舟将欲行，忽闻岸上踏歌声。桃花潭水深千尺，不及汪伦送我情。',
+  },
+  {
+    id: 'poem-songmenghaoran',
+    key: 'poem-songmenghaoran',
+    title: '送孟浩然之广陵',
+    description: '唐·李白',
+    getContent: () =>
+      '故人西辞黄鹤楼，烟花三月下扬州。孤帆远影碧空尽，唯见长江天际流。',
+  },
+  {
+    id: 'poem-shierwuchengtong',
+    key: 'poem-shierwuchengtong',
+    title: '石灰吟',
+    description: '明·于谦',
+    getContent: () =>
+      '千锤万凿出深山，烈火焚烧若等闲。粉骨碎身浑不怕，要留清白在人间。',
+  },
+  {
+    id: 'poem-guanquehaoxing',
+    key: 'poem-guanquehaoxing',
+    title: '凉州词',
+    description: '唐·王之涣',
+    getContent: () => '黄河远上白云间，一片孤城万仞山。羌笛何须怨杨柳，春风不度玉门关。',
+  },
 ]
