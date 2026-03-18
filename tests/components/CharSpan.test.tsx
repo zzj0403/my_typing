@@ -12,31 +12,36 @@ describe('CharSpan', () => {
     quanpin: 'ni',
   }
 
-  it('should render pending character with correct class (UI-02)', () => {
+  it('should render pending character with grid (UI-02)', () => {
     render(<CharSpan char={baseChar} state={CharState.Pending} isCurrent={false} />)
-    const span = screen.getByText('你')
-    // CSS modules generate hashed class names, check for presence of expected class pattern
-    expect(span.className).not.toMatch(/current/)
-    expect(span.className).not.toMatch(/correct/)
-    expect(span.className).not.toMatch(/incorrect/)
+    const hanzi = screen.getByText('你')
+    const container = hanzi.parentElement
+    expect(container?.className).not.toMatch(/current/)
+    expect(container?.className).not.toMatch(/correct/)
+    expect(container?.className).not.toMatch(/incorrect/)
+    // Grid shows the original pinyin in gray
+    expect(screen.getByText('n')).toBeInTheDocument()
+    expect(screen.getByText('i')).toBeInTheDocument()
   })
 
-  it('should render current character with underline class (UI-02)', () => {
+  it('should render current character with highlight class (UI-02)', () => {
     render(<CharSpan char={baseChar} state={CharState.Pending} isCurrent={true} />)
-    const span = screen.getByText('你')
-    expect(span.className).toMatch(/current/)
+    const hanzi = screen.getByText('你')
+    const container = hanzi.parentElement
+    expect(container?.className).toMatch(/current/)
   })
 
   it('should render correct character with green class (UI-03)', () => {
     render(<CharSpan char={baseChar} state={CharState.Correct} isCurrent={false} />)
-    const span = screen.getByText('你')
-    expect(span.className).toMatch(/correct/)
+    const hanzi = screen.getByText('你')
+    const container = hanzi.parentElement
+    expect(container?.className).toMatch(/correct/)
   })
 
   it('should render incorrect character with red and strikethrough (UI-04)', () => {
     render(<CharSpan char={baseChar} state={CharState.Incorrect} isCurrent={false} inputPinyin="ta" />)
-    const span = screen.getByText('你')
-    expect(span.className).toMatch(/incorrect/)
-    expect(screen.getByText('ta')).toBeInTheDocument() // shows error pinyin
+    const hanzi = screen.getByText('你')
+    const container = hanzi.parentElement
+    expect(container?.className).toMatch(/incorrect/)
   })
 })

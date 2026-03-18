@@ -46,7 +46,7 @@ export function useTypingGame(article: Article | null) {
     if (currentChar.type === CharType.Mark) {
       isCorrect = value === currentChar.char || PUNCTUATION_MAP[value] === currentChar.char
     } else if (currentChar.type === CharType.Hanzi) {
-      isCorrect = value === currentChar.quanpin
+      isCorrect = value.toLowerCase() === currentChar.quanpin.toLowerCase()
     }
 
     setChars(prev => prev.map((c, i) => {

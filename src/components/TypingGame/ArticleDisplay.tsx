@@ -1,7 +1,7 @@
 import React from 'react'
 import type { Sentence, CharInfo } from '@/types/article'
 import { CharSpan } from './CharSpan'
-import type { TypingChar, TypingHanziChar } from '@/types/typing'
+import type { TypingChar } from '@/types/typing'
 import { CharType } from '@/core'
 import styles from './index.module.less'
 
@@ -9,20 +9,17 @@ export interface ArticleDisplayProps {
   sentences: Sentence[]
   chars: TypingChar[]
   currentIndex: number
+  inputPinyin?: string
+  onPinyinChange?: (value: string) => void
 }
 
-/**
- * 安全获取 inputPinyin 属性
- */
-function getInputPinyin(char: TypingChar | undefined): string | undefined {
-  if (char && char.type === CharType.Hanzi) {
-    return (char as TypingHanziChar).inputPinyin
-  }
-  return undefined
-}
-
-export function ArticleDisplay({ sentences, chars, currentIndex }: ArticleDisplayProps) {
-  // Calculate character offset for each sentence
+export function ArticleDisplay({
+  sentences,
+  chars,
+  currentIndex,
+  inputPinyin = '',
+  onPinyinChange
+}: ArticleDisplayProps) {
   let charOffset = 0
 
   return (
@@ -37,14 +34,19 @@ export function ArticleDisplay({ sentences, chars, currentIndex }: ArticleDispla
             {sentence.chars.map((char, charIndex) => {
               const globalIndex = sentenceStart + charIndex
               const typingChar = chars[globalIndex]
+              const isCurrent = globalIndex === currentIndex
+
+              // Get input pinyin for current hanzi character
+              const charInputPinyin = isCurrent && char.type === CharType.Hanzi ? inputPinyin : ''
 
               return (
                 <CharSpan
                   key={`${sentence.id}-${charIndex}`}
                   char={char}
                   state={typingChar?.state || 'pending'}
-                  isCurrent={globalIndex === currentIndex}
-                  inputPinyin={getInputPinyin(typingChar)}
+                  isCurrent={isCurrent}
+                  inputPinyin={charInputPinyin}
+                  onPinyinChange={isCurrent ? onPinyinChange : undefined}
                 />
               )
             })}
