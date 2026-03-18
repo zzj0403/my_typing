@@ -1,0 +1,47 @@
+.char {
+  position: relative;
+  font-size: 24px;
+  line-height: 1.5;
+  transition: color 0.2s ease;
+
+  & + .char {
+    margin-left: 4px;
+  }
+}
+
+.current {
+  border-bottom: 2px solid #1890ff;
+  animation: blink 1s infinite;
+}
+
+.correct {
+  color: #52c41a;
+}
+
+.incorrect {
+  color: #ff4d4f;
+  text-decoration: line-through;
+}
+
+.skipped {
+  color: #bfbfbf;
+}
+
+.errorPinyin {
+  position: absolute;
+  bottom: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  color: #ff4d4f;
+  white-space: nowrap;
+}
+
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}
