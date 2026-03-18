@@ -1,13 +1,24 @@
 import React from 'react'
 import type { Sentence, CharInfo } from '@/types/article'
 import { CharSpan } from './CharSpan'
-import type { TypingChar } from '@/types/typing'
+import type { TypingChar, TypingHanziChar } from '@/types/typing'
+import { CharType } from '@/core'
 import styles from './index.module.less'
 
 export interface ArticleDisplayProps {
   sentences: Sentence[]
   chars: TypingChar[]
   currentIndex: number
+}
+
+/**
+ * 安全获取 inputPinyin 属性
+ */
+function getInputPinyin(char: TypingChar | undefined): string | undefined {
+  if (char && char.type === CharType.Hanzi) {
+    return (char as TypingHanziChar).inputPinyin
+  }
+  return undefined
 }
 
 export function ArticleDisplay({ sentences, chars, currentIndex }: ArticleDisplayProps) {
@@ -33,7 +44,7 @@ export function ArticleDisplay({ sentences, chars, currentIndex }: ArticleDispla
                   char={char}
                   state={typingChar?.state || 'pending'}
                   isCurrent={globalIndex === currentIndex}
-                  inputPinyin={typingChar?.inputPinyin}
+                  inputPinyin={getInputPinyin(typingChar)}
                 />
               )
             })}

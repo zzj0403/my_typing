@@ -1,17 +1,41 @@
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo, useEffect } from 'react'
 import { CharType } from '@/core'
 import { CharState, PUNCTUATION_MAP, type TypingChar, type TypingProgress } from '@/types/typing'
 import type { Article } from '@/types/article'
 
-export function useTypingGame(article: Article | null) {
-  const [chars, setChars] = useState<TypingChar[]>(() => {
-    if (!article) return []
-    return article.sentences.flatMap(s =>
-      s.chars.map(c => ({ ...c, state: CharState.Pending }))
-    )
-  })
+/**
+ * 将 Article 的字符转换为 TypingChar
+ */
+function articleToTypingChars(article: Article | null): TypingChar[] {
+  if (!article) return []
+  return article.sentences.flatMap(s =>
+    s.chars.map(c => {
+      if (c.type === CharType.Hanzi) {
+        return {
+          type: CharType.Hanzi,
+          char: c.char,
+          quanpin: c.quanpin,
+          state: CharState.Pending,
+        } as TypingChar
+      }
+      return {
+        type: CharType.Mark,
+        char: c.char,
+        state: CharState.Pending,
+      } as TypingChar
+    })
+  )
+}
 
+export function useTypingGame(article: Article | null) {
+  const [chars, setChars] = useState<TypingChar[]>(() => articleToTypingChars(article))
   const [currentIndex, setCurrentIndex] = useState(0)
+
+  // 当 article 变化时，重新初始化
+  useEffect(() => {
+    setChars(articleToTypingChars(article))
+    setCurrentIndex(0)
+  }, [article?.id])
 
   const handleInput = useCallback((value: string) => {
     if (!article || currentIndex >= chars.length) return
@@ -46,10 +70,7 @@ export function useTypingGame(article: Article | null) {
   }, [chars, currentIndex])
 
   const reset = useCallback(() => {
-    if (!article) return
-    setChars(article.sentences.flatMap(s =>
-      s.chars.map(c => ({ ...c, state: CharState.Pending }))
-    ))
+    setChars(articleToTypingChars(article))
     setCurrentIndex(0)
   }, [article])
 

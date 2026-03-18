@@ -10,7 +10,7 @@ const { Title } = Typography
 
 export function TypingGame() {
   const { currentArticleId, getArticleById } = useArticleStore()
-  const article = currentArticleId ? getArticleById(currentArticleId) : null
+  const article = currentArticleId ? getArticleById(currentArticleId) ?? null : null
 
   const {
     chars,

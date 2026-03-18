@@ -1,4 +1,4 @@
-import type { CharInfo } from './article'
+import { CharType } from '@/core'
 
 /**
  * 字符状态枚举
@@ -11,12 +11,29 @@ export enum CharState {
 }
 
 /**
- * 打字字符 - 扩展 CharInfo 添加状态字段
+ * 打字字符 - 标点类型
  */
-export interface TypingChar extends CharInfo {
+export interface TypingMarkChar {
+  type: CharType.Mark
+  char: string
+  state: CharState
+}
+
+/**
+ * 打字字符 - 汉字类型
+ */
+export interface TypingHanziChar {
+  type: CharType.Hanzi
+  char: string
+  quanpin: string
   state: CharState
   inputPinyin?: string  // 用户输入（用于错误显示）
 }
+
+/**
+ * 打字字符 - 联合类型
+ */
+export type TypingChar = TypingMarkChar | TypingHanziChar
 
 /**
  * 打字进度
