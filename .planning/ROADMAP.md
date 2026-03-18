@@ -51,14 +51,14 @@ Plans:
 
 **Goal:** 改造现有单字练习为整篇文章连续打字
 
-**Tasks:**
-- [ ] 复用现有拼音匹配逻辑
-- [ ] 修改打字界面为整篇文章展示
-- [ ] 实现逐字实时反馈（正确绿色/错误红色）
-- [ ] 实现标点符号直接匹配
-- [ ] 实现错误可跳过继续
-- [ ] 实现进度指示（已打/总字数）
-- [ ] 实现打完提示
+**Plans:** 5 plans in 4 waves
+
+Plans:
+- [ ] 02-00-PLAN.md — 测试基础设施 (Wave 0) — 测试骨架文件
+- [ ] 02-01-PLAN.md — 类型定义和 Hook (Wave 1) — typing types + useTypingGame
+- [ ] 02-02-PLAN.md — CharSpan 组件 (Wave 1) — 字符渲染 + 状态样式
+- [ ] 02-03-PLAN.md — TypingGame 组件 (Wave 2) — 文章展示 + 输入处理 + 完成提示
+- [ ] 02-04-PLAN.md — Hero 页面集成 (Wave 3) — TypingGame 替换 Hanzi
 
 **Success Criteria:**
 - 看着原文逐句打完整篇文章
@@ -114,6 +114,10 @@ Phase 1 (文章管理)
     └── 01-06 (Wave 3: UI 层)
     ↓
 Phase 2 (打字模式) ← 依赖 Phase 1 的文章数据
+    ├── 02-00 (Wave 0: 测试骨架)
+    ├── 02-01, 02-02 (Wave 1: 核心逻辑)
+    ├── 02-03 (Wave 2: UI 组件)
+    └── 02-04 (Wave 3: 页面集成)
     ↓
 Phase 3 (UI优化)
 ```
@@ -131,4 +135,4 @@ Phase 3 (UI优化)
 ---
 *Roadmap created: 2026-03-17*
 *Estimated phases: 4 (v1) + 2 (v2)*
-*Last updated: 2026-03-17 - Phase 1 plans created*
+*Last updated: 2026-03-18 - Phase 2 plans created*
