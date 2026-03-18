@@ -3,15 +3,12 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-03-18T01:52:00Z"
+last_updated: "2026-03-18T02:04:05.544Z"
 progress:
   total_phases: 4
   completed_phases: 2
-  total_plans: 13
-  completed_plans: 10
-current_phase: 02-article-typing-mode
-current_plan: 3
-total_plans_in_phase: 6
+  total_plans: 12
+  completed_plans: 11
 ---
 
 # State: My Typing
@@ -97,6 +94,8 @@ See: `.planning/PROJECT.md`
 - [Phase 01-article-management]: Convert ü to v in pinyin for keyboard input compatibility (绿 -> lv)
 - [Phase 01-article-management]: Filter poems/quotes by ID prefix (poem-/quote-) since they share builtin source
 - [Phase 02-article-typing-mode]: Use esbuild classic runtime (jsxFactory: React.createElement) for vitest React component tests due to @vitejs/plugin-react 1.x preamble detection issue
+- [Phase 02-article-typing-mode]: Use native input with composition events instead of controlled antd Input for IME compatibility
+- [Phase 02-article-typing-mode]: Check message.success completion in DOM text rather than spy for integration tests
 
 ## Next Action
 

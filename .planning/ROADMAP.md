@@ -51,7 +51,7 @@ Plans:
 
 **Goal:** 改造现有单字练习为整篇文章连续打字
 
-**Plans:** 5 plans in 4 waves (3 complete)
+**Plans:** 4/5 plans executed
 
 Plans:
 - [x] 02-00-PLAN.md — 测试基础设施 (Wave 0) — 测试骨架文件
