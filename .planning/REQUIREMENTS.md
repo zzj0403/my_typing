@@ -16,10 +16,10 @@
 ### 打字练习 (TYP)
 
 - [ ] **TYP-01**: 看着原文逐句/逐段打字
-- [ ] **TYP-02**: 全拼输入匹配（仅支持全拼）
-- [ ] **TYP-03**: 实时正确/错误反馈（字符高亮）
-- [ ] **TYP-04**: 打错可跳过继续（标记错误但不阻断）
-- [ ] **TYP-05**: 标点符号直接按键匹配
+- [x] **TYP-02**: 全拼输入匹配（仅支持全拼）
+- [x] **TYP-03**: 实时正确/错误反馈（字符高亮）
+- [x] **TYP-04**: 打错可跳过继续（标记错误但不阻断）
+- [x] **TYP-05**: 标点符号直接按键匹配
 - [ ] **TYP-06**: 打完一篇文章后有完成提示
 
 ### UI/UX (UI)
@@ -28,7 +28,7 @@
 - [ ] **UI-02**: 当前输入位置高亮显示
 - [ ] **UI-03**: 正确字符绿色标记
 - [ ] **UI-04**: 错误字符红色标记
-- [ ] **UI-05**: 进度指示（已打/总字数）
+- [x] **UI-05**: 进度指示（已打/总字数）
 
 ## v2 Requirements
 
@@ -65,16 +65,16 @@
 | ART-04 | Phase 1 | Complete |
 | ART-05 | Phase 1 | Complete |
 | TYP-01 | Phase 2 | Pending |
-| TYP-02 | Phase 2 | Pending |
-| TYP-03 | Phase 2 | Pending |
-| TYP-04 | Phase 2 | Pending |
-| TYP-05 | Phase 2 | Pending |
+| TYP-02 | Phase 2 | Complete |
+| TYP-03 | Phase 2 | Complete |
+| TYP-04 | Phase 2 | Complete |
+| TYP-05 | Phase 2 | Complete |
 | TYP-06 | Phase 2 | Pending |
 | UI-01 | Phase 2 | Pending |
 | UI-02 | Phase 2 | Pending |
 | UI-03 | Phase 2 | Pending |
 | UI-04 | Phase 2 | Pending |
-| UI-05 | Phase 2 | Pending |
+| UI-05 | Phase 2 | Complete |
 
 **Coverage:**
 - v1 requirements: 16 total
