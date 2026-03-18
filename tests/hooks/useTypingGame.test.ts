@@ -40,7 +40,7 @@ describe('useTypingGame', () => {
   it('should mark character as correct when pinyin matches (TYP-03)', () => {
     const { result } = renderHook(() => useTypingGame(mockArticle))
     act(() => { result.current.handleInput('hao') })
-    expect(result.current.chars[1].state).toBe(CharState.Incorrect) // Index moved
+    expect(result.current.chars[0].state).toBe(CharState.Incorrect) // Wrong pinyin for index 0
     act(() => { result.current.reset() })
     act(() => { result.current.handleInput('ni') })
     expect(result.current.chars[0].state).toBe(CharState.Correct)
