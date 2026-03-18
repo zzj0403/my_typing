@@ -36,7 +36,7 @@ See: `.planning/PROJECT.md`
 | Phase 2 | 🔵 In Progress | 整篇文章打字模式 |
 | Phase 3 | ⚪ Not Started | UI 优化 & 收尾 |
 
-**Current Position:** Phase 2 Plan 02 Complete
+**Current Position:** Phase 2 Plan 04 Complete
 
 ---
 
@@ -96,12 +96,14 @@ See: `.planning/PROJECT.md`
 - [Phase 02-article-typing-mode]: Use esbuild classic runtime (jsxFactory: React.createElement) for vitest React component tests due to @vitejs/plugin-react 1.x preamble detection issue
 - [Phase 02-article-typing-mode]: Use native input with composition events instead of controlled antd Input for IME compatibility
 - [Phase 02-article-typing-mode]: Check message.success completion in DOM text rather than spy for integration tests
+- [Phase 02-article-typing-mode]: Use explicit TypingMarkChar | TypingHanziChar union instead of extending union type for TypeScript compatibility
+- [Phase 02-article-typing-mode]: Use regex matching for CSS module class names in tests (className.toMatch(/pattern/))
 
 ## Next Action
 
-**Run:** `/gsd:execute-phase 2` (continue with plan 03)
+**Run:** `/gsd:execute-phase 2` (continue with plan 05)
 
-继续执行 Phase 2 Plan 03 - ArticleDisplay Component。
+继续执行 Phase 2 Plan 05 - 完成整篇文章打字模式功能。
 
 ---
 
@@ -174,6 +176,17 @@ See: `.planning/PROJECT.md`
 - 4 个单元测试全部通过
 - 修复 vitest 配置以支持 React 组件测试（classic runtime）
 - Summary: `.planning/phases/02-article-typing-mode/02-02-SUMMARY.md`
+
+### 2026-03-18 Phase 2 Plan 04 完成
+
+- 将 Hanzi 组件替换为 TypingGame 组件
+- 移除 TextRegister 集成（现在由 useTypingGame hook 处理）
+- 移除文本模板 Select 组件（不再需要）
+- 修复 TypingChar 类型定义（使用显式联合类型）
+- 修复 useProfileBin 类型安全问题
+- 修复 CSS modules 测试（使用 regex 匹配）
+- 3 个功能提交 + 测试全部通过
+- Summary: `.planning/phases/02-article-typing-mode/02-04-SUMMARY.md`
 
 ### 2026-03-17 初始化
 
