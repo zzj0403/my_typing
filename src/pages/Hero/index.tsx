@@ -6,7 +6,6 @@ import {
   Input,
   List,
   Modal,
-  Select,
   Tooltip,
   Typography,
 } from 'antd'
@@ -24,22 +23,15 @@ import { useBoolean } from 'ahooks'
 import useProfileBin from './useProfileBin'
 import styles from './index.module.less'
 
-import type { HanziCharConfig, TextConfig, MarkCharConfig, HanziCharConfig as HanziCharConfigType } from '@/core'
-
-import { CharType, Registry } from '@/core'
-import { Hanzi } from '@/components'
+import { TypingGame } from '@/components'
 import ArticleList from '@/components/ArticleList'
 import { useArticleStore } from '@/stores'
 
 const mouseEnterDelay = 0.5
 
 export default function Hero() {
-  const textOptions = Registry.text.getTextOptions()
-
   const [formRef] = Form.useForm()
   const {
-    bin,
-    onChangeBin,
     detailLoading,
     updateLoading,
     onSignIn,
@@ -48,7 +40,7 @@ export default function Hero() {
     onClearCache,
   } = useProfileBin({
     schemaType: 'QuanPin', // 仅支持全拼
-    textKey: textOptions[0]?.key,
+    textKey: 'default',
     inputTextIndex: 0,
     inputPinyin: '',
   })
@@ -57,90 +49,18 @@ export default function Hero() {
   const [articleListVisible, { toggle: toggleArticleListVisible }] = useBoolean(false)
 
   // 获取文章 store
-  const { currentArticleId, selectArticle, getArticleById } = useArticleStore()
+  const { selectArticle } = useArticleStore()
 
-  // 当选中文章变化时，注册到 TextRegister
+  // 当选中文章时，关闭 Drawer
   const handleArticleSelect = React.useCallback((articleId: string) => {
     selectArticle(articleId)
-    const article = getArticleById(articleId)
-    if (article) {
-      // 将文章转换为 TextConfig 格式
-      const text: (MarkCharConfig | HanziCharConfigType)[] = []
-      article.sentences.forEach(sentence => {
-        sentence.chars.forEach(char => {
-          if (char.type === CharType.Hanzi) {
-            text.push({
-              type: CharType.Hanzi,
-              char: char.char,
-              quanpin: char.quanpin,
-            } as HanziCharConfigType)
-          } else {
-            text.push({
-              type: CharType.Mark,
-              char: char.char,
-            } as MarkCharConfig)
-          }
-        })
-      })
-
-      // 注册到 TextRegister
-      const textConfig: TextConfig = {
-        key: article.key,
-        title: article.title,
-        description: article.description,
-        text,
-      }
-      Registry.text.register(textConfig)
-
-      // 切换到新注册的文章
-      onChangeBin({ inputTextIndex: 0, textKey: article.key })
-      toggleArticleListVisible()
-    }
-  }, [selectArticle, getArticleById, onChangeBin, toggleArticleListVisible])
-
-  const textConfig = React.useMemo(() => {
-    return Registry.text.getTextConfig(bin?.textKey || textOptions[0]?.key)
-  }, [bin.textKey])
-
-  const currentCharConfig = React.useMemo(() => {
-    if (!textConfig) {
-      return null
-    }
-    const text = textConfig.text.filter((item) => item.type === CharType.Hanzi)
-    const index = (bin.inputTextIndex || 0) % text.length
-    return text?.[index] as HanziCharConfig
-  }, [textConfig, bin.inputTextIndex])
-
-  const currentPinyin = React.useMemo(() => {
-    if (currentCharConfig) {
-      // 仅支持全拼，使用固定 schemaType
-      return Registry.schema.getPinyin(
-        'QuanPin',
-        currentCharConfig.quanpin,
-      )
-    }
-  }, [currentCharConfig])
-
-  React.useEffect(() => {
-    if (bin.inputPinyin && bin.inputPinyin === currentPinyin) {
-      // onChangeBin 需要函数式更新状态，否则后者 inputPinyin 的变化会重置
-      // inputTextIndex 的变化，导致无法切换到下一个字符。
-      onChangeBin({
-        inputTextIndex: (bin?.inputTextIndex || 0) + 1,
-        inputPinyin: '',
-      })
-    }
-  }, [currentPinyin, bin.inputPinyin, bin.inputTextIndex])
+    toggleArticleListVisible()
+  }, [selectArticle, toggleArticleListVisible])
 
   return (
     <div className={styles.app}>
-      <div>
-        <Hanzi
-          zi={currentCharConfig?.char}
-          original={currentPinyin}
-          modified={bin.inputPinyin}
-          onChange={(value) => onChangeBin({ inputPinyin: value })}
-        />
+      <div className={styles.mainContent}>
+        <TypingGame />
       </div>
       <div className={styles.menu}>
         <Input.Group compact>
@@ -152,28 +72,6 @@ export default function Hero() {
             icon={<SettingOutlined />}
             onClick={() => toggleSettingsVisible()}
           />
-          <Select
-            style={{
-              width: 130,
-            }}
-            options={textOptions.map((item) => ({
-              value: item.key,
-              label: item.title,
-            }))}
-            placeholder='拼写模板'
-            value={bin.textKey}
-            onChange={(value) => {
-              onChangeBin({ inputTextIndex: 0, textKey: value })
-            }}
-          />
-          <Tooltip overlay='重置本地输入状态' mouseEnterDelay={mouseEnterDelay}>
-            <Button
-              onClick={() => {
-                onChangeBin({ inputTextIndex: 0, inputPinyin: '' })
-              }}
-              icon={<RedoOutlined />}
-            />
-          </Tooltip>
           <Tooltip
             overlay='同步本地状态到云端'
             mouseEnterDelay={mouseEnterDelay}

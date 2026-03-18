@@ -28,13 +28,22 @@ export default function useProfileBin(defaultProgress: BinRecord['progress']) {
   const onChangeBin = (nextBin: Partial<typeof processedBin>) => {
     const { name: nextName, ...nextProgress } = nextBin
     setBin((prevBin) => {
-      const prevProgress = get(prevBin, 'progress', defaultProgress)
+      const baseProgress = defaultProgress || {
+        schemaType: 'QuanPin',
+        textKey: 'default',
+        inputTextIndex: 0,
+        inputPinyin: '',
+      }
+      const prevProgress = get(prevBin, 'progress', baseProgress) || baseProgress
+      const progress = {
+        schemaType: nextProgress.schemaType ?? prevProgress?.schemaType ?? baseProgress.schemaType,
+        textKey: nextProgress.textKey ?? prevProgress?.textKey ?? baseProgress.textKey,
+        inputTextIndex: nextProgress.inputTextIndex ?? prevProgress?.inputTextIndex ?? baseProgress.inputTextIndex,
+        inputPinyin: nextProgress.inputPinyin ?? prevProgress?.inputPinyin ?? baseProgress.inputPinyin,
+      }
       return {
         name: nextName || prevBin?.name,
-        progress: {
-          ...prevProgress,
-          ...nextProgress,
-        },
+        progress,
       }
     })
   }
