@@ -51,13 +51,15 @@ Plans:
 
 **Goal:** 改造现有单字练习为整篇文章连续打字
 
-**Plans:** 5 plans in 4 waves (1 complete)
+**Plans:** 5 plans in 4 waves (3 complete)
 
 Plans:
 - [x] 02-00-PLAN.md — 测试基础设施 (Wave 0) — 测试骨架文件
   - Summary: `.planning/phases/02-article-typing-mode/02-00-SUMMARY.md`
-- [ ] 02-01-PLAN.md — 类型定义和 Hook (Wave 1) — typing types + useTypingGame
-- [ ] 02-02-PLAN.md — CharSpan 组件 (Wave 1) — 字符渲染 + 状态样式
+- [x] 02-01-PLAN.md — 类型定义和 Hook (Wave 1) — typing types + useTypingGame
+  - Summary: `.planning/phases/02-article-typing-mode/02-01-SUMMARY.md`
+- [x] 02-02-PLAN.md — CharSpan 组件 (Wave 1) — 字符渲染 + 状态样式
+  - Summary: `.planning/phases/02-article-typing-mode/02-02-SUMMARY.md`
 - [ ] 02-03-PLAN.md — TypingGame 组件 (Wave 2) — 文章展示 + 输入处理 + 完成提示
 - [ ] 02-04-PLAN.md — Hero 页面集成 (Wave 3) — TypingGame 替换 Hanzi
 

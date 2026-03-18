@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-last_updated: "2026-03-18T01:50:00Z"
+last_updated: "2026-03-18T01:52:00Z"
 progress:
   total_phases: 4
   completed_phases: 2
   total_plans: 13
-  completed_plans: 9
+  completed_plans: 10
 current_phase: 02-article-typing-mode
-current_plan: 2
+current_plan: 3
 total_plans_in_phase: 6
 ---
 
@@ -39,7 +39,7 @@ See: `.planning/PROJECT.md`
 | Phase 2 | 🔵 In Progress | 整篇文章打字模式 |
 | Phase 3 | ⚪ Not Started | UI 优化 & 收尾 |
 
-**Current Position:** Phase 2 Plan 01 Complete
+**Current Position:** Phase 2 Plan 02 Complete
 
 ---
 
@@ -96,12 +96,13 @@ See: `.planning/PROJECT.md`
 - [Phase 01-article-management]: Use Drawer component for article list display instead of separate page
 - [Phase 01-article-management]: Convert ü to v in pinyin for keyboard input compatibility (绿 -> lv)
 - [Phase 01-article-management]: Filter poems/quotes by ID prefix (poem-/quote-) since they share builtin source
+- [Phase 02-article-typing-mode]: Use esbuild classic runtime (jsxFactory: React.createElement) for vitest React component tests due to @vitejs/plugin-react 1.x preamble detection issue
 
 ## Next Action
 
-**Run:** `/gsd:execute-phase 2` (continue with plan 02)
+**Run:** `/gsd:execute-phase 2` (continue with plan 03)
 
-继续执行 Phase 2 Plan 02 - CharSpan Component。
+继续执行 Phase 2 Plan 03 - ArticleDisplay Component。
 
 ---
 
@@ -166,6 +167,14 @@ See: `.planning/PROJECT.md`
 - 实现 useTypingGame hook（pinyin/punctuation matching, progress tracking）
 - 6 个单元测试全部通过
 - Summary: `.planning/phases/02-article-typing-mode/02-01-SUMMARY.md`
+
+### 2026-03-18 Phase 2 Plan 02 完成
+
+- 创建 CharSpan 组件（状态样式：pending/current/correct/incorrect/skipped）
+- 创建 CharSpan.module.less 样式文件
+- 4 个单元测试全部通过
+- 修复 vitest 配置以支持 React 组件测试（classic runtime）
+- Summary: `.planning/phases/02-article-typing-mode/02-02-SUMMARY.md`
 
 ### 2026-03-17 初始化
 
